@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FALX Systems | Arquitetura de Conhecimento &amp; Inteligência Institucional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Sora:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+–void:            #020204;
+–void-surface:    #060608;
+–void-elevated:   #0a0a10;
+–void-card:       #050508;
+–border:          #14141f;
+–border-subtle:   #0f0f19;
+–border-active:   #1c1c2e;
+–border-glow:     #24243a;
+–blue:            #1A56DB;
+–blue-soft:       #3B6FE8;
+–blue-dim:        #2a4a9e;
+–blue-muted:      #1e3670;
+–blue-wash:       #0d1f4a;
+–glow-2:          rgba(26,86,219,0.02);
+–glow-4:          rgba(26,86,219,0.04);
+–glow-6:          rgba(26,86,219,0.06);
+–glow-10:         rgba(26,86,219,0.10);
+–glow-15:         rgba(26,86,219,0.15);
+–glow-25:         rgba(26,86,219,0.25);
+–t100:            #E2E4EA;
+–t90:             #C8CAD4;
+–t80:             #AEB1BE;
+–t60:             #7E8290;
+–t40:             #565A68;
+–t25:             #3E4250;
+–t15:             #262A36;
+–t08:             #161820;
+–mono:            ‘JetBrains Mono’, monospace;
+–sans:            ‘Sora’, sans-serif;
+–expo:            cubic-bezier(0.16,1,0.3,1);
+–quart:           cubic-bezier(0.25,1,0.5,1);
+–sine:            cubic-bezier(0.37,0,0.63,1);
+–smooth:          cubic-bezier(0.4,0,0.2,1);
+–page-max:        1140px;
+–page-gutter:     clamp(24px, 4vw, 64px);
+–section-gap:     100px;
+–block-gap:       48px;
+–content-max:     680px;
+–narrow-max:      560px;
+}
+
+html { scroll-behavior: smooth; background: var(–void); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { background: var(–void); color: var(–t100); font-family: var(–sans); overflow-x: hidden; line-height: 1.65; }
+::selection { background: var(–glow-25); color: #fff; }
+
+/* ─── ATMOSPHERE ─── */
+.atmosphere { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.atmosphere-orb { position: absolute; border-radius: 50%; filter: blur(180px); will-change: transform; }
+.atmosphere-orb–primary { top: -15%; left: -8%; width: 50vw; height: 50vw; max-width: 800px; max-height: 800px; background: radial-gradient(circle, rgba(26,86,219,0.025) 0%, transparent 55%); animation: d1 50s var(–sine) infinite alternate; }
+.atmosphere-orb–secondary { bottom: -20%; right: -12%; width: 40vw; height: 40vw; max-width: 600px; max-height: 600px; background: radial-gradient(circle, rgba(59,111,232,0.015) 0%, transparent 50%); animation: d2 55s var(–sine) infinite alternate; }
+.atmosphere-orb–tertiary { top: 45%; left: 25%; width: 30vw; height: 30vw; max-width: 450px; max-height: 450px; background: radial-gradient(circle, rgba(26,86,219,0.012) 0%, transparent 45%); animation: d3 65s var(–sine) infinite alternate; }
+@keyframes d1 { to { transform: translate(50px,-40px) scale(1.05); } }
+@keyframes d2 { to { transform: translate(-40px,30px) scale(1.03); } }
+@keyframes d3 { to { transform: translate(25px,-45px) scale(0.95); } }
+.grain { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.015; background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 512 512’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘g’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.75’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23g)’/%3E%3C/svg%3E”); background-size: 256px 256px; }
+
+/* ─── LEFT-ANCHORED CONTAINER ─── */
+/* STRUCTURAL FIX: No margin: 0 auto. Content anchors to the left gutter. */
+.page {
+position: relative;
+z-index: 1;
+max-width: calc(var(–page-max) + var(–page-gutter));
+margin: 0;
+margin-left: var(–page-gutter);
+padding: 0;
+}
+
+/* ─── DIVIDERS ─── */
+.divider { height: 1px; border: none; margin: 0; background: var(–border); }
+.divider::after { display: none; }
+.divider–subtle { background: var(–border-subtle); }
+
+/* ─── NAV ─── */
+/* Nav stays full-width but content anchors left */
+.nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+height: 56px; display: flex; align-items: center;
+justify-content: flex-start;
+gap: 0;
+padding: 0 var(–page-gutter);
+background: rgba(2,2,4,0.9);
+backdrop-filter: blur(32px) saturate(1.3);
+-webkit-backdrop-filter: blur(32px) saturate(1.3);
+border-bottom: 1px solid var(–border-subtle);
+transition: all 0.5s var(–smooth);
+}
+.nav.is-scrolled { background: rgba(2,2,4,0.97); border-bottom-color: var(–border); }
+.nav-wordmark { font-family: var(–mono); font-size: .9rem; font-weight: 600; letter-spacing: .32em; color: var(–t100); text-transform: uppercase; text-decoration: none; }
+.nav-wordmark span { color: var(–blue); }
+.nav-cta {
+font-family: var(–mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+color: var(–t60); text-decoration: none;
+margin-left: auto;
+display: inline-flex; align-items: center; gap: 8px;
+padding: 7px 16px;
+border: 1px solid var(–border);
+position: relative; overflow: hidden;
+transition: all 0.4s var(–expo);
+}
+.nav-cta::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(–blue-dim) 50%, transparent); opacity: 0; transition: opacity 0.4s var(–expo); }
+.nav-cta::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, var(–glow-4) 0%, transparent 70%); opacity: 0; transition: opacity 0.4s var(–expo); }
+.nav-cta:hover { color: var(–t100); border-color: var(–border-glow); box-shadow: 0 1px 16px var(–glow-4); }
+.nav-cta:hover::before, .nav-cta:hover::after { opacity: 1; }
+.nav-cta svg { position: relative; z-index: 1; transition: transform 0.3s var(–expo); }
+.nav-cta:hover svg { transform: translateX(2px); }
+
+/* ─── HERO ─── */
+.hero {
+min-height: 100vh; min-height: 100dvh;
+display: flex; flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 120px 0 var(–section-gap);
+position: relative;
+}
+.hero::before { content: ‘’; position: absolute; top: 15%; left: -5%; width: 400px; height: 400px; background: radial-gradient(circle, var(–glow-4) 0%, transparent 55%); pointer-events: none; filter: blur(100px); }
+.hero-eyebrow { font-family: var(–mono); font-size: 16px; letter-spacing: 0.4em; text-transform: uppercase; color: var(–blue-dim); margin-bottom: 40px; opacity: 0; transform: translateY(8px); animation: ru 0.9s var(–expo) 0.1s forwards; text-align: left; }
+.hero-title { font-family: var(–sans); font-size: clamp(31px,5.5vw,65px); font-weight: 200; line-height: 1.15; letter-spacing: -0.035em; color: var(–t100); max-width: 780px; margin-bottom: 32px; opacity: 0; transform: translateY(14px); animation: ru 1s var(–expo) 0.2s forwards; text-align: left; }
+.hero-title strong { font-weight: 200; background: linear-gradient(135deg, var(–blue-soft) 0%, var(–blue) 50%, var(–blue-soft) 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gs 6s var(–sine) infinite; }
+@keyframes gs { 0%,100%{background-position:0% 50%}50%{background-position:100% 50%} }
+.hero-premise { font-family: var(–sans); font-size: clamp(23px,1.9vw,29px); font-weight: 300; line-height: 1.75; color: var(–t60); max-width: var(–content-max); margin-bottom: 28px; opacity: 0; transform: translateY(10px); animation: ru 1s var(–expo) 0.35s forwards; text-align: left; }
+.hero-for-whom { font-family: var(–mono); font-size: 17px; letter-spacing: 0.06em; color: var(–t40); line-height: 1.85; max-width: var(–narrow-max); margin-bottom: 56px; padding-left: 16px; border-left: 1px solid var(–border); position: relative; opacity: 0; transform: translateY(8px); animation: ru 1s var(–expo) 0.45s forwards; text-align: left; }
+.hero-for-whom::before { content: ‘’; position: absolute; left: -1px; top: 0; width: 1px; height: 0; background: linear-gradient(180deg, var(–blue-dim), transparent); animation: lg 1.8s var(–expo) 0.9s forwards; }
+@keyframes lg { from{height:0}to{height:100%} }
+.hero-signals { display: flex; gap: 56px; opacity: 0; transform: translateY(8px); animation: ru 0.9s var(–expo) 0.55s forwards; justify-content: flex-start; }
+.signal { display: flex; flex-direction: column; gap: 8px; text-align: left; }
+.signal-value { font-family: var(–mono); font-size: 34px; font-weight: 300; color: var(–t100); letter-spacing: -0.03em; position: relative; }
+.signal-value::after { content: ‘’; position: absolute; bottom: -4px; left: 0; width: 20px; height: 1px; background: var(–blue-muted); opacity: 0.5; }
+.signal-label { font-family: var(–mono); font-size: 14.5px; letter-spacing: 0.25em; text-transform: uppercase; color: var(–t25); }
+.hero > .divider { position: absolute; bottom: 0; left: 0; right: 0; }
+
+/* ─── SECTION SYSTEM ─── */
+.section-eyebrow { font-family: var(–mono); font-size: 16px; letter-spacing: 0.4em; text-transform: uppercase; color: var(–blue-dim); margin-bottom: 16px; display: flex; align-items: center; gap: 14px; text-align: left; }
+.section-eyebrow::before { content: ‘’; width: 20px; height: 1px; background: var(–blue-muted); flex-shrink: 0; }
+.section-title { font-family: var(–sans); font-size: clamp(24px,3.4vw,43px); font-weight: 200; letter-spacing: -0.025em; color: var(–t100); max-width: var(–content-max); line-height: 1.3; text-align: left; }
+.scenarios-header { margin-bottom: var(–block-gap); text-align: left; }
+.services-header { margin-bottom: 64px; text-align: left; }
+
+/* ─── SCENARIOS ─── */
+.scenarios { padding: var(–section-gap) 0; }
+.scenarios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(–border-subtle); border: 1px solid var(–border-subtle); overflow: hidden; }
+.scenario { background: var(–void-card); padding: 36px 32px; display: flex; flex-direction: column; gap: 14px; position: relative; transition: background 0.5s var(–expo); text-align: left; }
+.scenario::before { content: ‘’; position: absolute; left: 0; top: 20%; bottom: 20%; width: 2px; background: var(–blue-dim); opacity: 0; transition: opacity 0.4s var(–expo), top 0.4s var(–expo), bottom 0.4s var(–expo); }
+.scenario::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse at 0% 50%, var(–glow-4) 0%, transparent 50%); opacity: 0; transition: opacity 0.5s var(–expo); pointer-events: none; }
+.scenario:hover { background: var(–void-elevated); }
+.scenario:hover::before { opacity: 1; top: 12%; bottom: 12%; }
+.scenario:hover::after { opacity: 1; }
+.scenario-trigger { font-family: var(–sans); font-size: clamp(23px,2.2vw,30px); font-weight: 400; color: var(–t100); line-height: 1.45; letter-spacing: -0.01em; position: relative; z-index: 1; }
+.scenario-context { font-family: var(–sans); font-size: 23px; font-weight: 300; line-height: 1.7; color: var(–t40); position: relative; z-index: 1; }
+.scenario-phase { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(–t25); margin-top: auto; padding-top: 16px; border-top: 1px solid var(–border-subtle); transition: color 0.3s var(–quart); position: relative; z-index: 1; }
+.scenario:hover .scenario-phase { color: var(–blue-dim); }
+
+/* ─── POSITIONING ─── */
+.positioning { padding: 80px 0; }
+.positioning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.positioning-label { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; color: var(–t25); margin-bottom: 24px; text-align: left; }
+.negation-list, .affirmation-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.negation-list li, .affirmation-list li { font-family: var(–sans); font-size: 23.5px; font-weight: 300; padding-left: 24px; position: relative; line-height: 1.55; transition: color 0.3s var(–quart); text-align: left; }
+.negation-list li { color: var(–t40); } .affirmation-list li { color: var(–t90); }
+.negation-list li:hover { color: var(–t60); } .affirmation-list li:hover { color: var(–t100); }
+.negation-list li::before, .affirmation-list li::before { content: ‘’; position: absolute; left: 0; top: 50%; height: 1px; transition: width 0.3s var(–expo); }
+.negation-list li::before { width: 12px; background: var(–t15); }
+.affirmation-list li::before { width: 12px; background: var(–blue-dim); }
+.affirmation-list li:hover::before { width: 16px; }
+
+/* ─── THESIS ─── */
+.thesis { padding: 72px 0; text-align: left; }
+.thesis-statement { font-family: var(–sans); font-size: clamp(24px,2.6vw,37px); font-weight: 300; line-height: 1.7; color: var(–t90); max-width: 720px; letter-spacing: -0.005em; text-align: left; }
+.thesis-statement strong { font-weight: 400; color: var(–blue-soft); }
+
+/* ─── URGENCY ─── */
+.urgency { padding: var(–section-gap) 0; }
+.urgency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 56px; margin-top: var(–block-gap); }
+.urgency-point { display: flex; flex-direction: column; gap: 10px; padding-left: 20px; border-left: 1px solid var(–border-subtle); transition: border-color 0.4s var(–expo); text-align: left; }
+.urgency-point:hover { border-left-color: var(–blue-muted); }
+.urgency-claim { font-family: var(–sans); font-size: 26px; font-weight: 400; color: var(–t100); line-height: 1.4; }
+.urgency-detail { font-family: var(–sans); font-size: 23px; font-weight: 300; color: var(–t40); line-height: 1.65; }
+
+/* ─── PHASES ─── */
+.phases { padding: var(–section-gap) 0; }
+.phases-track { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin-top: 56px; position: relative; }
+.phases-track::before { content: ‘’; position: absolute; top: 27px; left: 27px; right: 27px; height: 1px; background: var(–border); }
+.phase { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 14px; }
+.phase-marker { width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(–border); background: var(–void); display: flex; align-items: center; justify-content: center; font-family: var(–mono); font-size: 13px; color: var(–t25); position: relative; z-index: 2; transition: all 0.5s var(–expo); }
+.phase-marker::before { content: ‘’; position: absolute; inset: -6px; border-radius: 50%; background: radial-gradient(circle, var(–glow-6) 0%, transparent 70%); opacity: 0; transition: opacity 0.5s var(–expo); }
+.phase:hover .phase-marker { border-color: var(–blue-dim); color: var(–blue-soft); box-shadow: 0 0 20px var(–glow-10); }
+.phase:hover .phase-marker::before { opacity: 1; }
+.phase-name { font-family: var(–sans); font-size: 25px; font-weight: 400; color: var(–t100); }
+.phase-scope { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.12em; color: var(–t25); text-transform: uppercase; line-height: 1.75; }
+.phase-need { font-family: var(–sans); font-size: 20px; font-weight: 300; color: var(–t40); line-height: 1.6; max-width: 240px; margin-top: 2px; font-style: italic; }
+
+/* ─── EVIDENCE ─── */
+.evidence { padding: var(–section-gap) 0; }
+.evidence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(–border-subtle); border: 1px solid var(–border-subtle); overflow: hidden; margin-top: var(–block-gap); }
+.evidence-item { background: var(–void-card); padding: 36px 32px; display: flex; flex-direction: column; gap: 12px; position: relative; transition: background 0.5s var(–expo); text-align: left; }
+.evidence-item::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse at 10% 0%, var(–glow-4) 0%, transparent 55%); opacity: 0; transition: opacity 0.5s var(–expo); pointer-events: none; }
+.evidence-item:hover { background: var(–void-elevated); }
+.evidence-item:hover::after { opacity: 1; }
+.evidence-name { font-family: var(–sans); font-size: 27px; font-weight: 400; color: var(–t100); letter-spacing: -0.01em; position: relative; z-index: 1; }
+.evidence-desc { font-family: var(–sans); font-size: 23px; font-weight: 300; line-height: 1.65; color: var(–t40); position: relative; z-index: 1; }
+.evidence-type { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(–t25); margin-top: auto; padding-top: 14px; border-top: 1px solid var(–border-subtle); position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; }
+.evidence-type::before { content: ‘’; width: 4px; height: 4px; background: var(–blue-dim); border-radius: 50%; flex-shrink: 0; transition: box-shadow 0.4s var(–expo); }
+.evidence-item:hover .evidence-type::before { box-shadow: 0 0 8px var(–glow-15); }
+
+/* ─── SERVICES ─── */
+.services { padding: var(–section-gap) 0 80px; }
+
+/* Phase Selector Tabs */
+.phase-selector {
+display: flex; gap: 1px; margin-bottom: 40px;
+background: var(–border-subtle); border: 1px solid var(–border-subtle); overflow: hidden;
+}
+.phase-tab {
+flex: 1; padding: 14px 16px;
+font-family: var(–mono); font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+color: var(–t25); background: var(–void-card); border: none; cursor: pointer;
+transition: all 0.4s var(–expo); position: relative;
+}
+.phase-tab::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(–blue-dim); opacity: 0; transition: opacity 0.4s var(–expo); }
+.phase-tab:hover { color: var(–t60); background: var(–void-elevated); }
+.phase-tab.is-active { color: var(–t100); background: var(–void-elevated); }
+.phase-tab.is-active::before { opacity: 1; }
+
+/* Full Package Banner */
+.full-package {
+margin-bottom: 48px; padding: 36px 32px;
+background: var(–void-card); border: 1px solid var(–border);
+position: relative; overflow: hidden;
+transition: opacity 0.5s var(–expo), max-height 0.6s var(–expo), margin 0.5s var(–expo), padding 0.5s var(–expo);
+max-height: 400px;
+}
+.full-package.is-hidden { opacity: 0; max-height: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; border-color: transparent; pointer-events: none; }
+.full-package::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(–blue-dim) 0%, var(–blue-muted) 30%, transparent 70%); }
+.full-package::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse at 0% 0%, var(–glow-4) 0%, transparent 50%); pointer-events: none; }
+.full-package-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; position: relative; z-index: 1; }
+.full-package-content { display: flex; flex-direction: column; gap: 10px; max-width: 640px; }
+.full-package-label { font-family: var(–mono); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: var(–blue-muted); }
+.full-package-title { font-family: var(–sans); font-size: clamp(21px,2vw,27px); font-weight: 400; color: var(–t100); letter-spacing: -0.01em; line-height: 1.35; }
+.full-package-desc { font-family: var(–sans); font-size: 20px; font-weight: 300; line-height: 1.65; color: var(–t40); }
+.full-package-action {
+display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0; align-self: center;
+font-family: var(–mono); font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+color: var(–t90); background: var(–void); border: 1px solid var(–border-active);
+padding: 14px 28px; text-decoration: none; white-space: nowrap;
+position: relative; overflow: hidden; transition: all 0.4s var(–expo);
+}
+.full-package-action::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(–blue-dim) 50%, transparent); opacity: 0; transition: opacity 0.4s var(–expo); }
+.full-package-action:hover { border-color: var(–border-glow); color: var(–t100); box-shadow: 0 2px 20px var(–glow-4); }
+.full-package-action:hover::before { opacity: 1; }
+.full-package-action svg { transition: transform 0.3s var(–expo); }
+.full-package-action:hover svg { transform: translateX(2px); }
+
+/* Cluster with action */
+.cluster { margin-bottom: 56px; transition: opacity 0.5s var(–expo), max-height 0.6s var(–expo), margin 0.5s var(–expo); max-height: 2000px; overflow: hidden; }
+.cluster:last-child { margin-bottom: 0; }
+.cluster.is-hidden { opacity: 0; max-height: 0; margin-bottom: 0; pointer-events: none; }
+.cluster-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(–border-subtle); }
+.cluster-phase { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; color: var(–blue-muted); flex-shrink: 0; }
+.cluster-name { font-family: var(–sans); font-size: 23px; font-weight: 400; color: var(–t40); letter-spacing: 0.03em; }
+.cluster-action-wrap { margin-left: auto; }
+.cluster-action {
+display: inline-flex; align-items: center; gap: 8px;
+font-family: var(–mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+color: var(–t25); text-decoration: none;
+padding: 6px 14px; border: 1px solid var(–border-subtle);
+transition: all 0.3s var(–expo); white-space: nowrap;
+}
+.cluster-action:hover { color: var(–t60); border-color: var(–border-active); }
+.cluster-action svg { transition: transform 0.3s var(–expo); }
+.cluster-action:hover svg { transform: translateX(2px); }
+.cluster-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(–border-subtle); border: 1px solid var(–border-subtle); overflow: hidden; }
+.cluster-grid–three { grid-template-columns: 1fr 1fr 1fr; }
+.svc { background: var(–void-card); padding: 32px 28px 28px; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; transition: background 0.5s var(–expo); text-align: left; }
+.svc::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(–blue-dim), transparent 60%); opacity: 0; transition: opacity 0.4s var(–expo); }
+.svc::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse at 10% 0%, var(–glow-4) 0%, transparent 55%); opacity: 0; transition: opacity 0.5s var(–expo); pointer-events: none; }
+.svc:hover { background: var(–void-elevated); } .svc:hover::before { opacity: 1; } .svc:hover::after { opacity: 1; }
+.svc-index { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.2em; color: var(–t08); position: relative; z-index: 1; transition: color 0.3s var(–quart); }
+.svc:hover .svc-index { color: var(–t25); }
+.svc-name { font-family: var(–sans); font-size: clamp(23px,2.2vw,30px); font-weight: 400; color: var(–t100); letter-spacing: -0.01em; line-height: 1.3; position: relative; z-index: 1; }
+.svc-desc { font-family: var(–sans); font-size: 23px; font-weight: 300; line-height: 1.7; color: var(–t60); position: relative; z-index: 1; max-width: 420px; }
+.svc-output { font-family: var(–mono); font-size: 17px; letter-spacing: 0.06em; color: var(–t25); margin-top: auto; padding-top: 14px; border-top: 1px solid var(–border-subtle); position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; transition: color 0.3s var(–quart); }
+.svc:hover .svc-output { color: var(–blue-dim); }
+.svc-output::before { content: ‘’; width: 4px; height: 4px; background: var(–t15); border-radius: 50%; transition: all 0.4s var(–expo); flex-shrink: 0; }
+.svc:hover .svc-output::before { background: var(–blue-dim); box-shadow: 0 0 8px var(–glow-15); }
+
+/* ─── TRANSFORMATION ─── */
+.transformation { padding: var(–section-gap) 0; }
+.transformation-grid { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0; align-items: start; margin-top: var(–block-gap); }
+.transformation-col { padding: 32px; background: var(–void-card); border: 1px solid var(–border-subtle); display: flex; flex-direction: column; gap: 16px; text-align: left; }
+.transformation-col–after { border-color: var(–border); position: relative; }
+.transformation-col–after::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(–blue-dim) 0%, var(–glow-6) 40%, transparent 100%); }
+.transformation-col–after::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse at 0% 0%, var(–glow-2) 0%, transparent 50%); pointer-events: none; }
+.transformation-arrow { display: flex; align-items: center; justify-content: center; align-self: center; color: var(–t15); }
+.transformation-label { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; }
+.transformation-label–before { color: var(–t25); } .transformation-label–after { color: var(–blue-muted); }
+.transformation-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.transformation-list li { font-family: var(–sans); font-size: 23.5px; font-weight: 300; line-height: 1.55; padding-left: 20px; position: relative; }
+.transformation-col:not(.transformation-col–after) .transformation-list li { color: var(–t40); }
+.transformation-col–after .transformation-list li { color: var(–t90); }
+.transformation-list li::before { content: ‘’; position: absolute; left: 0; top: 50%; width: 10px; height: 1px; }
+.transformation-col:not(.transformation-col–after) .transformation-list li::before { background: var(–t15); }
+.transformation-col–after .transformation-list li::before { background: var(–blue-dim); }
+.transformation-note { font-family: var(–mono); font-size: 16px; letter-spacing: 0.08em; color: var(–t15); margin-top: 20px; text-align: left; }
+
+/* ─── ENTRY ─── */
+.entry { padding: var(–section-gap) 0; position: relative; }
+.entry::before { content: ‘’; position: absolute; top: 0; left: -10%; width: 60%; height: 100%; background: radial-gradient(ellipse at 20% 30%, var(–glow-4) 0%, transparent 55%); pointer-events: none; }
+.entry-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; position: relative; z-index: 1; }
+.entry-content { display: flex; flex-direction: column; gap: 20px; text-align: left; }
+.entry-badge { font-family: var(–mono); font-size: 14.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(–blue-dim); padding: 5px 12px; border: 1px solid var(–blue-muted); display: inline-flex; align-self: flex-start; margin-bottom: 2px; position: relative; overflow: hidden; }
+.entry-badge::after { content: ‘’; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, var(–glow-6), transparent); animation: sh 3s var(–sine) infinite; }
+@keyframes sh { 0%{transform:translateX(-100%)}100%{transform:translateX(100%)} }
+.entry-title { font-family: var(–sans); font-size: clamp(23px,2.6vw,34px); font-weight: 300; color: var(–t100); letter-spacing: -0.025em; line-height: 1.25; text-align: left; }
+.entry-desc { font-family: var(–sans); font-size: 24px; font-weight: 300; line-height: 1.75; color: var(–t60); text-align: left; }
+.entry-rec { font-family: var(–mono); font-size: 16px; letter-spacing: 0.06em; color: var(–t25); font-style: italic; text-align: left; }
+.entry-includes { display: flex; flex-direction: column; gap: 20px; padding: 32px; background: var(–void-card); border: 1px solid var(–border); position: relative; overflow: hidden; text-align: left; }
+.entry-includes::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(–blue-dim) 0%, var(–glow-6) 40%, transparent 100%); }
+.entry-includes::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse at 0% 0%, var(–glow-2) 0%, transparent 50%); pointer-events: none; }
+.entry-includes-label { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; color: var(–blue-muted); position: relative; z-index: 1; }
+.entry-includes-list { list-style: none; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+.entry-includes-list li { font-family: var(–sans); font-size: 23.5px; font-weight: 300; color: var(–t90); padding-left: 24px; position: relative; line-height: 1.55; }
+.entry-includes-list li::before { content: ‘’; position: absolute; left: 0; top: 50%; width: 12px; height: 1px; background: var(–blue-muted); }
+.entry-output { font-family: var(–mono); font-size: 17px; letter-spacing: 0.08em; color: var(–t40); padding-top: 14px; border-top: 1px solid var(–border-subtle); position: relative; z-index: 1; }
+.entry-output strong { color: var(–t90); font-weight: 400; }
+
+/* ─── EXCLUSION ─── */
+.exclusion { padding: 64px 0; text-align: left; }
+.exclusion-content { max-width: var(–narrow-max); }
+.exclusion-title { font-family: var(–sans); font-size: clamp(18px,1.7vw,23px); font-weight: 300; color: var(–t60); letter-spacing: -0.01em; margin-bottom: 24px; }
+.exclusion-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.exclusion-list li { font-family: var(–sans); font-size: 23.5px; font-weight: 300; color: var(–t25); padding-left: 24px; position: relative; line-height: 1.55; }
+.exclusion-list li::before { content: ‘’; position: absolute; left: 0; top: 50%; width: 12px; height: 1px; background: var(–t08); }
+
+/* ─── PRINCIPAL ─── */
+.principal { padding: var(–section-gap) 0; }
+.principal-layout { display: grid; grid-template-columns: 200px 1fr; gap: 56px; align-items: start; }
+.principal-photo { width: 200px; height: 264px; background: var(–void-surface); border: 1px solid var(–border); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+.principal-photo::before { content: ‘’; position: absolute; top: 0; left: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(–blue-dim) 0%, transparent 60%); }
+.principal-photo::after { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(–blue-dim), transparent 50%); }
+.principal-photo img { width: 100%; height: 100%; object-fit: cover; }
+.principal-photo-placeholder { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.25em; text-transform: uppercase; color: var(–t15); }
+.principal-content { display: flex; flex-direction: column; gap: 24px; padding-top: 2px; text-align: left; }
+.principal-identity { display: flex; flex-direction: column; gap: 6px; }
+.principal-kicker { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; color: var(–t25); margin-bottom: 2px; }
+.principal-name { font-family: var(–sans); font-size: clamp(23px,2.4vw,31px); font-weight: 400; color: var(–t100); letter-spacing: -0.015em; }
+.principal-role { font-family: var(–mono); font-size: 17px; letter-spacing: 0.28em; text-transform: uppercase; color: var(–blue-muted); }
+.principal-role-sub { font-family: var(–mono); font-size: 16px; letter-spacing: 0.15em; color: var(–t25); margin-top: 2px; }
+.principal-text { display: flex; flex-direction: column; gap: 16px; }
+.principal-text p { font-family: var(–sans); font-size: clamp(21.5px,1.8vw,26px); font-weight: 300; line-height: 1.75; color: var(–t60); max-width: var(–narrow-max); }
+.principal-domains { padding-top: 8px; display: flex; flex-direction: column; gap: 12px; }
+.principal-domains-label { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; color: var(–t25); }
+.principal-domains-list { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-start; }
+.domain-tag { font-family: var(–mono); font-size: 16px; letter-spacing: 0.05em; color: var(–t40); padding: 5px 12px; border: 1px solid var(–border); transition: all 0.3s var(–quart); position: relative; overflow: hidden; }
+.domain-tag::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, var(–glow-4) 0%, transparent 80%); opacity: 0; transition: opacity 0.3s var(–quart); }
+.domain-tag:hover { border-color: var(–border-active); color: var(–t60); }
+.domain-tag:hover::after { opacity: 1; }
+
+/* ─── CTA ─── */
+.cta { padding: var(–section-gap) 0; position: relative; text-align: left; }
+.cta::before { content: ‘’; position: absolute; top: 40%; left: -5%; width: 400px; height: 300px; background: radial-gradient(ellipse, var(–glow-4) 0%, transparent 55%); pointer-events: none; filter: blur(50px); }
+.cta-declaration { font-family: var(–sans); font-size: clamp(22px,2.9vw,36px); font-weight: 200; color: var(–t100); letter-spacing: -0.025em; margin-bottom: 10px; line-height: 1.35; max-width: var(–content-max); position: relative; text-align: left; }
+.cta-premise { font-family: var(–sans); font-size: 24px; font-weight: 300; color: var(–t40); margin-bottom: 40px; position: relative; text-align: left; }
+.cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; position: relative; justify-content: flex-start; }
+.cta-action { display: inline-flex; align-items: center; gap: 14px; font-family: var(–mono); font-size: 17px; letter-spacing: 0.2em; text-transform: uppercase; color: var(–t90); background: var(–void-card); border: 1px solid var(–border); padding: 18px 36px; text-decoration: none; position: relative; overflow: hidden; transition: all 0.5s var(–expo); cursor: pointer; }
+.cta-action::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(–blue-dim) 50%, transparent); opacity: 0; transition: opacity 0.4s var(–expo); }
+.cta-action::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, var(–glow-4) 0%, transparent 70%); opacity: 0; transition: opacity 0.5s var(–expo); }
+.cta-action:hover { border-color: var(–border-glow); color: var(–t100); box-shadow: 0 2px 24px var(–glow-4), 0 0 0 1px var(–glow-6); }
+.cta-action:hover::before { opacity: 1; } .cta-action:hover::after { opacity: 1; }
+.cta-action span { position: relative; z-index: 1; }
+.cta-action svg { position: relative; z-index: 1; transition: transform 0.3s var(–expo); }
+.cta-action:hover svg { transform: translateX(3px); }
+.cta-action–secondary { background: transparent; border-color: var(–border-subtle); color: var(–t40); }
+.cta-action–secondary::before, .cta-action–secondary::after { display: none; }
+.cta-action–secondary:hover { color: var(–t60); border-color: var(–border); box-shadow: none; }
+.cta-qualifier { font-family: var(–mono); font-size: 16px; letter-spacing: 0.08em; color: var(–t15); line-height: 1.7; position: relative; text-align: left; }
+
+/* ─── FOOTER ─── */
+/* Footer: left-anchored, no space-between centering */
+.footer {
+padding: 32px 0;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+gap: 40px;
+}
+.footer-wordmark { font-family: var(–mono); font-size: .9rem; font-weight: 600; letter-spacing: .32em; color: var(–t25); text-transform: uppercase; }
+.footer-descriptor { font-family: var(–mono); font-size: 14.5px; letter-spacing: 0.18em; color: var(–t15); text-transform: uppercase; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes ru { to { opacity: 1; transform: translateY(0); } }
+.observe { opacity: 0; transform: translateY(16px); transition: opacity 1s var(–expo), transform 1s var(–expo); }
+.observe.is-visible { opacity: 1; transform: translateY(0); }
+.observe-stagger > * { opacity: 0; transform: translateY(12px); transition: opacity 0.7s var(–expo), transform 0.7s var(–expo); }
+.observe-stagger.is-visible > * { opacity: 1; transform: translateY(0); }
+
+/* ─── ORIGIN OVERLAY ─── */
+/* Overlay keeps its centering — it’s a modal, not page structure */
+.origin-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(2,2,4,0.96); backdrop-filter: blur(48px) saturate(1.2); -webkit-backdrop-filter: blur(48px) saturate(1.2); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.5s var(–expo), visibility 0.5s; overflow-y: auto; padding: 60px 24px; }
+.origin-overlay.is-open { opacity: 1; visibility: visible; }
+.origin-overlay.is-open .origin-inner { opacity: 1; transform: translateY(0); }
+.origin-inner { max-width: 960px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; opacity: 0; transform: translateY(12px); transition: opacity 0.6s var(–expo) 0.12s, transform 0.6s var(–expo) 0.12s; }
+.origin-close { position: fixed; top: 20px; right: 24px; z-index: 210; background: none; border: 1px solid var(–border); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(–t40); font-size: 18px; font-family: var(–sans); transition: all 0.3s var(–quart); cursor: pointer; }
+.origin-close:hover { border-color: var(–border-active); color: var(–t80); }
+.origin-left { display: flex; flex-direction: column; gap: 36px; text-align: left; }
+.origin-identity { display: flex; flex-direction: column; gap: 6px; }
+.origin-kicker { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; color: var(–t25); margin-bottom: 4px; }
+.origin-name { font-family: var(–sans); font-size: 29px; font-weight: 400; color: var(–t100); letter-spacing: -0.015em; }
+.origin-role { font-family: var(–mono); font-size: 16px; letter-spacing: 0.25em; text-transform: uppercase; color: var(–blue-muted); }
+.origin-role-sub { font-family: var(–mono); font-size: 16px; letter-spacing: 0.15em; color: var(–t25); margin-top: 2px; }
+.origin-bio { font-family: var(–sans); font-size: 23.5px; font-weight: 300; line-height: 1.75; color: var(–t60); max-width: 420px; }
+.origin-neuro { display: flex; flex-direction: column; gap: 14px; }
+.origin-neuro-title { font-family: var(–sans); font-size: 21.5px; font-weight: 400; color: var(–t100); letter-spacing: -0.01em; }
+.origin-neuro-sub { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(–t25); margin-top: -6px; }
+.origin-neuro-desc { font-family: var(–sans); font-size: 23px; font-weight: 300; line-height: 1.7; color: var(–t40); max-width: 400px; }
+.origin-neuro-punch { font-family: var(–sans); font-size: 23.5px; font-weight: 300; color: var(–t60); font-style: italic; line-height: 1.5; }
+.origin-right { display: flex; flex-direction: column; gap: 36px; padding-top: 4px; text-align: left; }
+.origin-qualify { display: flex; flex-direction: column; gap: 14px; }
+.origin-qualify-title { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; color: var(–t25); }
+.origin-qualify-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.origin-qualify-list li { font-family: var(–sans); font-size: 23px; font-weight: 300; color: var(–t60); padding-left: 20px; position: relative; line-height: 1.55; }
+.origin-qualify-list li::before { content: ‘’; position: absolute; left: 0; top: 50%; width: 10px; height: 1px; background: var(–blue-dim); }
+.origin-channels { display: flex; flex-direction: column; gap: 20px; }
+.origin-channels-title { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; color: var(–t25); }
+.origin-channel { display: flex; flex-direction: column; gap: 3px; padding-bottom: 16px; border-bottom: 1px solid var(–border-subtle); }
+.origin-channel:last-child { border-bottom: none; padding-bottom: 0; }
+.origin-channel-name { font-family: var(–sans); font-size: 24px; font-weight: 400; color: var(–t90); }
+.origin-channel-desc { font-family: var(–sans); font-size: 20.5px; font-weight: 300; color: var(–t25); }
+.origin-actions { display: flex; flex-direction: column; gap: 12px; }
+.origin-actions-title { font-family: var(–mono); font-size: 15.5px; letter-spacing: 0.35em; text-transform: uppercase; color: var(–t25); margin-bottom: 6px; }
+.origin-btn { display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(–mono); font-size: 16px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; padding: 16px 28px; transition: all 0.4s var(–expo); position: relative; overflow: hidden; cursor: pointer; }
+.origin-btn–primary { color: var(–t100); background: var(–void-card); border: 1px solid var(–border-active); }
+.origin-btn–primary::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(–blue-dim) 50%, transparent); opacity: 0; transition: opacity 0.4s var(–expo); }
+.origin-btn–primary:hover { border-color: var(–border-glow); box-shadow: 0 2px 24px var(–glow-4); }
+.origin-btn–primary:hover::before { opacity: 1; }
+.origin-btn–secondary { color: var(–t40); background: transparent; border: 1px solid var(–border-subtle); }
+.origin-btn–secondary:hover { color: var(–t60); border-color: var(–border); }
+.origin-micro { font-family: var(–sans); font-size: 21.5px; font-weight: 300; font-style: italic; color: var(–t25); margin-top: 12px; line-height: 1.5; }
+
+/* ═══ RESPONSIVE 1024 ═══ */
+@media (max-width: 1024px) {
+:root { –section-gap: 80px; –block-gap: 40px; }
+.cluster-grid–three { grid-template-columns: 1fr 1fr; }
+.phases-track { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+.phases-track::before { display: none; }
+}
+/* ═══ RESPONSIVE 768 ═══ */
+@media (max-width: 768px) {
+:root { –section-gap: 72px; –block-gap: 36px; }
+.scenarios-grid, .evidence-grid, .cluster-grid, .cluster-grid–three { grid-template-columns: 1fr; }
+.positioning-grid { grid-template-columns: 1fr; gap: 40px; }
+.urgency-grid { grid-template-columns: 1fr; gap: 32px; }
+.entry-layout { grid-template-columns: 1fr; gap: 36px; }
+.principal-layout { grid-template-columns: 1fr; gap: 32px; }
+.principal-photo { width: 160px; height: 210px; }
+.transformation-grid { grid-template-columns: 1fr; gap: 0; }
+.transformation-arrow { transform: rotate(90deg); padding: 12px 0; }
+.origin-inner { grid-template-columns: 1fr; gap: 40px; }
+.hero-signals { flex-wrap: wrap; gap: 32px; }
+.hero { padding: 100px 0 72px; }
+.scenario { padding: 32px 28px; } .svc { padding: 28px 24px 24px; } .evidence-item { padding: 32px 28px; }
+.transformation-col { padding: 28px 24px; } .entry-includes { padding: 28px 24px; }
+.scenario-trigger { font-size: 24px; } .scenario-context { font-size: 20.5px; }
+.urgency-claim { font-size: 23px; } .urgency-detail { font-size: 20.5px; }
+.evidence-name { font-size: 24px; } .evidence-desc { font-size: 20.5px; }
+.svc-name { font-size: 24px; } .svc-desc { font-size: 20.5px; }
+.entry-desc { font-size: 21.5px; } .entry-includes-list li { font-size: 20.5px; }
+.negation-list li, .affirmation-list li { font-size: 20.5px; }
+.transformation-list li { font-size: 20.5px; } .exclusion-list li { font-size: 20.5px; }
+.principal-text p { font-size: 20.5px; } .thesis-statement { font-size: 26.5px; }
+.cta-premise { font-size: 21.5px; }
+.page { margin-right: var(–page-gutter); }
+.full-package-inner { flex-direction: column; gap: 24px; }
+.full-package-action { align-self: flex-start; }
+.full-package { padding: 28px 24px; }
+.full-package-title { font-size: 21px; }
+.full-package-desc { font-size: 18px; }
+.phase-selector { flex-wrap: wrap; }
+.phase-tab { flex: none; padding: 10px 14px; font-size: 11px; }
+.cluster-header { flex-wrap: wrap; gap: 10px; }
+.cluster-action-wrap { margin-left: 0; }
+}
+/* ═══ RESPONSIVE 480 ═══ */
+@media (max-width: 480px) {
+:root { –section-gap: 56px; –block-gap: 28px; –page-gutter: 20px; }
+.nav { padding: 0 20px; height: 50px; }
+.hero { padding: 88px 0 56px; min-height: auto; }
+.hero-eyebrow { margin-bottom: 28px; font-size: 13px; } .hero-premise { font-size: 19px; }
+.hero-for-whom { margin-bottom: 40px; font-size: 14.5px; }
+.hero-signals { gap: 24px; } .signal-value { font-size: 29px; } .signal-label { font-size: 12px; }
+.section-eyebrow { font-size: 13px; }
+.scenario { padding: 24px 20px; } .scenario-trigger { font-size: 20.5px; } .scenario-context { font-size: 18px; } .scenario-phase { font-size: 13px; }
+.positioning-label { font-size: 13px; } .negation-list li, .affirmation-list li { font-size: 18px; }
+.thesis-statement { font-size: 21.5px; }
+.urgency-claim { font-size: 20.5px; } .urgency-detail { font-size: 18px; }
+.phases-track { grid-template-columns: 1fr; gap: 20px; }
+.phase-name { font-size: 21.5px; } .phase-scope { font-size: 13px; } .phase-need { font-size: 17px; }
+.evidence-name { font-size: 21.5px; } .evidence-desc { font-size: 18px; } .evidence-type { font-size: 13px; } .evidence-item { padding: 24px 20px; }
+.cluster-phase { font-size: 13px; } .cluster-name { font-size: 19px; }
+.svc { padding: 24px 20px 20px; } .svc-index { font-size: 13px; } .svc-name { font-size: 20.5px; } .svc-desc { font-size: 18px; } .svc-output { font-size: 14.5px; }
+.transformation-label { font-size: 13px; } .transformation-list li { font-size: 18px; } .transformation-col { padding: 24px 20px; } .transformation-note { font-size: 13px; }
+.entry-badge { font-size: 12px; } .entry-desc { font-size: 19px; } .entry-rec { font-size: 13px; }
+.entry-includes { padding: 24px 20px; } .entry-includes-label { font-size: 13px; } .entry-includes-list li { font-size: 18px; } .entry-output { font-size: 14.5px; }
+.exclusion-list li { font-size: 18px; }
+.principal-kicker { font-size: 13px; } .principal-role { font-size: 14.5px; } .principal-role-sub { font-size: 13px; } .principal-text p { font-size: 18px; }
+.principal-domains-label { font-size: 13px; } .domain-tag { font-size: 13px; }
+.cta-premise { font-size: 19px; } .cta-action { font-size: 14.5px; padding: 16px 28px; } .cta-qualifier { font-size: 13px; }
+.cta-buttons { flex-direction: column; align-items: flex-start; }
+.phase-selector { gap: 0; }
+.phase-tab { font-size: 10px; letter-spacing: 0.1em; padding: 9px 10px; }
+.full-package { padding: 24px 20px; }
+.full-package-label { font-size: 11px; }
+.full-package-title { font-size: 19px; }
+.full-package-desc { font-size: 16px; }
+.full-package-action { font-size: 11px; padding: 12px 20px; }
+.cluster-action { font-size: 10px; padding: 5px 10px; }
+.nav-cta { font-size: 9px; letter-spacing: 0.15em; padding: 5px 10px; gap: 5px; }
+.nav-cta svg { width: 10px; height: 10px; }
+.footer { flex-direction: column; gap: 10px; align-items: flex-start; } .footer-descriptor { font-size: 12px; }
+.origin-overlay { padding: 64px 20px 28px; } .origin-close { top: 16px; right: 16px; width: 36px; height: 36px; font-size: 16px; }
+.origin-kicker, .origin-role, .origin-role-sub, .origin-neuro-sub, .origin-qualify-title, .origin-channels-title, .origin-actions-title { font-size: 13px; }
+.origin-bio, .origin-neuro-desc, .origin-neuro-punch, .origin-qualify-list li { font-size: 18px; }
+.origin-channel-name { font-size: 19px; } .origin-channel-desc { font-size: 17px; } .origin-btn { font-size: 13px; } .origin-micro { font-size: 17px; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="atmosphere">
+  <div class="atmosphere-orb atmosphere-orb--primary"></div>
+  <div class="atmosphere-orb atmosphere-orb--secondary"></div>
+  <div class="atmosphere-orb atmosphere-orb--tertiary"></div>
+</div>
+<div class="grain"></div>
+
+<nav class="nav">
+  <a class="nav-wordmark">FALX<span>.</span>Systems</a>
+  <a href="mailto:contato@falxsystems.com?subject=Solicita%C3%A7%C3%A3o%20%E2%80%93%20AI%20Intelligence%20Audit" class="nav-cta">Iniciar Diagn&oacute;stico<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</nav>
+
+<div class="page">
+
+  <section class="hero">
+    <div class="hero-eyebrow">Arquitetura de Servi&ccedil;os / 2026</div>
+    <h1 class="hero-title">Estruturamos o conhecimento da sua empresa para que ela seja <strong>compreendida com precis&atilde;o</strong> por IA, mercado e sistemas internos.</h1>
+    <p class="hero-premise">Arquitetura de conhecimento e intelig&ecirc;ncia institucional para empresas t&eacute;cnicas. N&atilde;o se trata de conte&uacute;do, campanhas ou otimiza&ccedil;&atilde;o superficial. Trata-se de infraestrutura intelectual.</p>
+    <div class="hero-for-whom">Para startups deep tech, produtos digitais complexos, ventures em consolida&ccedil;&atilde;o institucional e empresas preparando base para IA interna.</div>
+    <div class="hero-signals">
+      <div class="signal"><div class="signal-value">4</div><div class="signal-label">Fases Estrat&eacute;gicas</div></div>
+      <div class="signal"><div class="signal-value">14</div><div class="signal-label">M&oacute;dulos de Execu&ccedil;&atilde;o</div></div>
+
+```
+</div>
+<hr class="divider" style="position:absolute;bottom:0;left:0;right:0">
+```
+
+  </section>
+
+  <section class="scenarios observe"><div class="scenarios-header"><div class="section-eyebrow">Reconhecimento</div><h2 class="section-title">Se sua empresa enfrenta isso, esse trabalho &eacute; para voc&ecirc;</h2></div>
+    <div class="scenarios-grid">
+      <div class="scenario"><div class="scenario-trigger">Sua empresa &eacute; mal interpretada por LLMs.</div><div class="scenario-context">Sistemas de IA descrevem sua empresa de forma imprecisa, seus concorrentes s&atilde;o melhor representados, e cada resumo gerado por IA erode seu posicionamento.</div><div class="scenario-phase">Fase I &mdash; Descoberta</div></div>
+      <div class="scenario"><div class="scenario-trigger">O conhecimento existe em todo lugar e em lugar nenhum.</div><div class="scenario-context">Informa&ccedil;&atilde;o cr&iacute;tica vive em apresenta&ccedil;&otilde;es, docs, threads do Slack e na cabe&ccedil;a de tr&ecirc;s pessoas. Nenhum sistema guarda a verdade. Ferramentas de IA herdam o caos.</div><div class="scenario-phase">Fase II &mdash; Defini&ccedil;&atilde;o</div></div>
+      <div class="scenario"><div class="scenario-trigger">&Eacute; preciso escalar intelig&ecirc;ncia, n&atilde;o headcount.</div><div class="scenario-context">Voc&ecirc; est&aacute; preparando copilots, agentes ou IA interna, mas sua base de conhecimento n&atilde;o est&aacute; estruturada para m&aacute;quinas operarem.</div><div class="scenario-phase">Fase III &mdash; Arquitetura</div></div>
+      <div class="scenario"><div class="scenario-trigger">Decis&otilde;es estrat&eacute;gicas s&atilde;o tomadas por intui&ccedil;&atilde;o.</div><div class="scenario-context">Sinais de mercado, mudan&ccedil;as competitivas e riscos estruturais existem, mas n&atilde;o h&aacute; sistema para capturar, interpretar ou agir sobre eles.</div><div class="scenario-phase">Fase IV &mdash; Intelig&ecirc;ncia</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="positioning observe"><div class="positioning-grid"><div><div class="positioning-label">O que isso n&atilde;o &eacute;</div><ul class="negation-list"><li>Produ&ccedil;&atilde;o de conte&uacute;do</li><li>Servi&ccedil;os de marketing</li><li>Otimiza&ccedil;&atilde;o de SEO</li><li>Consultoria gen&eacute;rica</li></ul></div><div><div class="positioning-label">O que sua empresa passa a ter</div><ul class="affirmation-list"><li>Clareza conceitual sobre o que a empresa &eacute;</li><li>Narrativa institucional coerente e precisa</li><li>Base de conhecimento pronta para IA interna</li><li>Ativos can&ocirc;nicos de conhecimento</li><li>Estrutura sem&acirc;ntica p&uacute;blica consistente</li></ul></div></div></section>
+
+  <hr class="divider--subtle divider">
+
+  <section class="thesis observe"><p class="thesis-statement">N&oacute;s estruturamos o conhecimento institucional da sua empresa para tr&ecirc;s frentes: <strong>interpreta&ccedil;&atilde;o externa por IA</strong>, <strong>coer&ecirc;ncia narrativa e conceitual</strong> e <strong>operacionaliza&ccedil;&atilde;o interna para sistemas inteligentes</strong>.</p></section>
+
+  <hr class="divider--subtle divider">
+
+  <section class="urgency observe"><div class="scenarios-header"><div class="section-eyebrow">Por que agora</div><h2 class="section-title">O custo de n&atilde;o ter estrutura j&aacute; est&aacute; sendo cobrado</h2></div>
+    <div class="urgency-grid">
+      <div class="urgency-point"><div class="urgency-claim">LLMs j&aacute; mediam percep&ccedil;&atilde;o sobre sua empresa.</div><div class="urgency-detail">Clientes, investidores e parceiros perguntam ao ChatGPT sobre voc&ecirc;. A resposta que recebem &eacute; a sua narrativa p&uacute;blica &mdash; ou a falta dela.</div></div>
+      <div class="urgency-point"><div class="urgency-claim">Conhecimento fragmentado inviabiliza IA interna.</div><div class="urgency-detail">Sem base can&ocirc;nica, copilots e agentes n&atilde;o t&ecirc;m de onde extrair verdade. Automa&ccedil;&atilde;o sem estrutura gera velocidade para o lado errado.</div></div>
+      <div class="urgency-point"><div class="urgency-claim">Empresas mal estruturadas ser&atilde;o mal interpretadas.</div><div class="urgency-detail">A qualidade da sua representa&ccedil;&atilde;o em IA &eacute; proporcional &agrave; qualidade da estrutura que voc&ecirc; criou. N&atilde;o existe atalho.</div></div>
+      <div class="urgency-point"><div class="urgency-claim">Sem fonte can&ocirc;nica, a narrativa p&uacute;blica degrada.</div><div class="urgency-detail">Cada pessoa na empresa conta uma vers&atilde;o diferente. Cada documento contradiz o anterior. A desordem conceitual vira a vers&atilde;o oficial.</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="phases observe"><div class="services-header"><div class="section-eyebrow">Arquitetura de Engajamento</div><h2 class="section-title">Quatro fases da auditoria &agrave; intelig&ecirc;ncia operacional</h2></div>
+    <div class="phases-track observe-stagger">
+      <div class="phase"><div class="phase-marker">I</div><div class="phase-name">Descoberta</div><div class="phase-scope">Audit &middot; Mapeamento<br>Arquitetura Conceitual</div><div class="phase-need">Para quem n&atilde;o sabe como est&aacute; sendo interpretado por IA e mercado.</div></div>
+      <div class="phase"><div class="phase-marker">II</div><div class="phase-name">Defini&ccedil;&atilde;o</div><div class="phase-scope">Modelagem Sem&acirc;ntica<br>Documento Can&ocirc;nico</div><div class="phase-need">Para quem precisa consolidar conhecimento e narrativa institucional.</div></div>
+      <div class="phase"><div class="phase-marker">III</div><div class="phase-name">Arquitetura</div><div class="phase-scope">Knowledge Graph<br>AI Discoverability</div><div class="phase-need">Para quem est&aacute; preparando infraestrutura para IA interna.</div></div>
+      <div class="phase"><div class="phase-marker">IV</div><div class="phase-name">Intelig&ecirc;ncia</div><div class="phase-scope">Sistema Operacional<br>Camada de Decis&atilde;o</div><div class="phase-need">Para quem quer operar com intelig&ecirc;ncia estrutural cont&iacute;nua.</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="evidence observe"><div class="scenarios-header"><div class="section-eyebrow">Evid&ecirc;ncia Estrutural</div><h2 class="section-title">O que se materializa ao final de cada fase</h2></div>
+    <div class="evidence-grid">
+      <div class="evidence-item"><div class="evidence-name">AI Intelligence Audit Report</div><div class="evidence-desc">Diagn&oacute;stico da representa&ccedil;&atilde;o atual da empresa em IA, gaps sem&acirc;nticos identificados e roadmap estrutural.</div><div class="evidence-type">Relat&oacute;rio Estrat&eacute;gico</div></div>
+      <div class="evidence-item"><div class="evidence-name">Canonical Knowledge Document</div><div class="evidence-desc">Fonte autorit&aacute;ria de defini&ccedil;&atilde;o institucional, l&oacute;gica do produto e linguagem conceitual.</div><div class="evidence-type">Documento Institucional</div></div>
+      <div class="evidence-item"><div class="evidence-name">Semantic Model Framework</div><div class="evidence-desc">Taxonomia, rela&ccedil;&otilde;es conceituais e base sem&acirc;ntica para interpreta&ccedil;&atilde;o consistente por m&aacute;quinas e pessoas.</div><div class="evidence-type">Framework Sem&acirc;ntico</div></div>
+      <div class="evidence-item"><div class="evidence-name">Knowledge Graph Architecture</div><div class="evidence-desc">Modelo de rela&ccedil;&otilde;es estruturadas para IA interna, sistemas de conhecimento e camada de decis&atilde;o.</div><div class="evidence-type">Arquitetura de Dados</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="services" id="programas"><div class="services-header observe"><div class="section-eyebrow">Programas de Arquitetura</div><h2 class="section-title">Escolha a fase que resolve o problema atual &mdash; ou contrate a arquitetura completa.</h2></div>
+
+```
+<!-- PHASE SELECTOR -->
+<div class="phase-selector observe">
+  <button class="phase-tab is-active" data-phase="all">Arquitetura Completa</button>
+  <button class="phase-tab" data-phase="1">Fase I</button>
+  <button class="phase-tab" data-phase="2">Fase II</button>
+  <button class="phase-tab" data-phase="3">Fase III</button>
+  <button class="phase-tab" data-phase="4">Fase IV</button>
+</div>
+
+<!-- FULL PACKAGE BANNER -->
+<div class="full-package observe" id="package-banner">
+  <div class="full-package-inner">
+    <div class="full-package-content">
+      <div class="full-package-label">Arquitetura Completa &mdash; 4 Fases &middot; 14 M&oacute;dulos</div>
+      <div class="full-package-title">O programa integral: da auditoria &agrave; intelig&ecirc;ncia operacional cont&iacute;nua.</div>
+      <div class="full-package-desc">Ideal para empresas que precisam de transforma&ccedil;&atilde;o estrutural de ponta a ponta. Inclui todos os m&oacute;dulos abaixo, com continuidade estrat&eacute;gica entre fases e um roadmap de evolu&ccedil;&atilde;o integrado.</div>
+    </div>
+    <a href="mailto:contato@falxsystems.com?subject=Solicita%C3%A7%C3%A3o%20%E2%80%93%20Arquitetura%20Completa" class="full-package-action">Solicitar Proposta Completa<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</div>
+
+<!-- PHASE CLUSTERS -->
+<div class="cluster observe" data-cluster="1"><div class="cluster-header"><div class="cluster-phase">Fase I</div><div class="cluster-name">Descoberta</div><div class="cluster-action-wrap"><a href="mailto:contato@falxsystems.com?subject=Solicita%C3%A7%C3%A3o%20%E2%80%93%20Fase%20I%20Descoberta" class="cluster-action">Contratar esta fase<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div><div class="cluster-grid cluster-grid--three"><div class="svc"><div class="svc-index">01</div><div class="svc-name">AI Intelligence Audit</div><div class="svc-desc">Como LLMs descrevem sua empresa hoje. Onde est&atilde;o as lacunas sem&acirc;nticas e imprecis&otilde;es de interpreta&ccedil;&atilde;o.</div><div class="svc-output">AI Intelligence Audit Report</div></div><div class="svc"><div class="svc-index">02</div><div class="svc-name">Knowledge Mapping</div><div class="svc-desc">Mapeamento de conceitos centrais, estrutura do produto, rela&ccedil;&otilde;es entre sistemas e posicionamento.</div><div class="svc-output">Knowledge Map</div></div><div class="svc"><div class="svc-index">03</div><div class="svc-name">Conceptual Architecture</div><div class="svc-desc">Blueprint estrutural do neg&oacute;cio &mdash; modelo sist&ecirc;mico, l&oacute;gica do produto e vis&atilde;o arquitetural.</div><div class="svc-output">Conceptual Architecture Blueprint</div></div></div></div>
+
+<div class="cluster observe" data-cluster="2"><div class="cluster-header"><div class="cluster-phase">Fase II</div><div class="cluster-name">Defini&ccedil;&atilde;o</div><div class="cluster-action-wrap"><a href="mailto:contato@falxsystems.com?subject=Solicita%C3%A7%C3%A3o%20%E2%80%93%20Fase%20II%20Defini%C3%A7%C3%A3o" class="cluster-action">Contratar esta fase<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div><div class="cluster-grid"><div class="svc"><div class="svc-index">04</div><div class="svc-name">Semantic Modeling</div><div class="svc-desc">Taxonomia de conceitos, ontologia do produto e rela&ccedil;&otilde;es sem&acirc;nticas que definem como a empresa deve ser compreendida.</div><div class="svc-output">Semantic Model Framework</div></div><div class="svc"><div class="svc-index">05</div><div class="svc-name">Canonical Knowledge Document</div><div class="svc-desc">Defini&ccedil;&atilde;o oficial, arquitetura do produto e linguagem institucional em uma fonte autorit&aacute;ria.</div><div class="svc-output">Canonical Knowledge Document</div></div><div class="svc"><div class="svc-index">06</div><div class="svc-name">Strategic Whitepaper</div><div class="svc-desc">Sua empresa como tese tecnol&oacute;gica &mdash; articula&ccedil;&atilde;o do problema, abordagem e vis&atilde;o de futuro.</div><div class="svc-output">Institutional Whitepaper</div></div><div class="svc"><div class="svc-index">07</div><div class="svc-name">Narrative Engineering</div><div class="svc-desc">Linguagem estrat&eacute;gica, posicionamento intelectual e storytelling t&eacute;cnico calibrado para impacto.</div><div class="svc-output">Narrative Strategy Framework</div></div></div></div>
+
+<div class="cluster observe" data-cluster="3"><div class="cluster-header"><div class="cluster-phase">Fase III</div><div class="cluster-name">Arquitetura</div><div class="cluster-action-wrap"><a href="mailto:contato@falxsystems.com?subject=Solicita%C3%A7%C3%A3o%20%E2%80%93%20Fase%20III%20Arquitetura" class="cluster-action">Contratar esta fase<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div><div class="cluster-grid cluster-grid--three"><div class="svc"><div class="svc-index">08</div><div class="svc-name">AI Discoverability Architecture</div><div class="svc-desc">Estrutura sem&acirc;ntica p&uacute;blica e organiza&ccedil;&atilde;o para interpreta&ccedil;&atilde;o correta por LLMs.</div><div class="svc-output">AI Discoverability System</div></div><div class="svc"><div class="svc-index">09</div><div class="svc-name">Knowledge Graph Design</div><div class="svc-desc">Rela&ccedil;&otilde;es entre conceitos, arquitetura de dados conectada e base para IA interna.</div><div class="svc-output">Knowledge Graph Architecture</div></div><div class="svc"><div class="svc-index">10</div><div class="svc-name">AI-Ready Knowledge Base</div><div class="svc-desc">Estrutura de dados e base operacional para copilots, agentes e sistemas internos.</div><div class="svc-output">AI Knowledge Base System</div></div></div></div>
+
+<div class="cluster observe" data-cluster="4"><div class="cluster-header"><div class="cluster-phase">Fase IV</div><div class="cluster-name">Intelig&ecirc;ncia</div><div class="cluster-action-wrap"><a href="mailto:contato@falxsystems.com?subject=Solicita%C3%A7%C3%A3o%20%E2%80%93%20Fase%20IV%20Intelig%C3%AAncia" class="cluster-action">Contratar esta fase<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div><div class="cluster-grid"><div class="svc"><div class="svc-index">11</div><div class="svc-name">Decision Intelligence Layer</div><div class="svc-desc">An&aacute;lise de sinais externos, interpreta&ccedil;&atilde;o de mercado e gera&ccedil;&atilde;o de insights estruturais.</div><div class="svc-output">Strategic Intelligence Framework</div></div><div class="svc"><div class="svc-index">12</div><div class="svc-name">Knowledge Operating System</div><div class="svc-desc">Protocolos de governan&ccedil;a, evolu&ccedil;&atilde;o de conceitos e estrutura que acumula intelig&ecirc;ncia ao longo do tempo.</div><div class="svc-output">Knowledge Operating Model</div></div><div class="svc"><div class="svc-index">13</div><div class="svc-name">Visual Intelligence Assets</div><div class="svc-desc">Mapas conceituais, diagramas de arquitetura e visualiza&ccedil;&otilde;es do ecossistema em qualidade institucional.</div><div class="svc-output">Visual Knowledge System</div></div><div class="svc"><div class="svc-index">14</div><div class="svc-name">Strategic Final Report</div><div class="svc-desc">Estado inicial, transforma&ccedil;&atilde;o executada, nova arquitetura e recomenda&ccedil;&otilde;es estrat&eacute;gicas futuras.</div><div class="svc-output">Final Strategic Intelligence Report</div></div></div></div>
+```
+
+  </section>
+
+  <hr class="divider">
+
+  <section class="transformation observe"><div class="scenarios-header"><div class="section-eyebrow">Transforma&ccedil;&atilde;o Estrutural</div><h2 class="section-title">O que muda quando o conhecimento ganha arquitetura</h2></div>
+    <div class="transformation-grid"><div class="transformation-col"><div class="transformation-label transformation-label--before">Antes</div><ul class="transformation-list"><li>Conhecimento fragmentado em documentos dispersos</li><li>Narrativa institucional inconsistente</li><li>Representa&ccedil;&atilde;o imprecisa por IA</li><li>Sem base can&ocirc;nica para sistemas internos</li><li>Posicionamento conceitual fr&aacute;gil</li></ul></div><div class="transformation-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="transformation-col transformation-col--after"><div class="transformation-label transformation-label--after">Depois</div><ul class="transformation-list"><li>Estrutura can&ocirc;nica de conhecimento definida</li><li>Sem&acirc;ntica institucional consolidada</li><li>Narrativa alinhada e precisa para IA e mercado</li><li>Base operacional pronta para sistemas inteligentes</li><li>Identidade conceitual dur&aacute;vel e interpret&aacute;vel</li></ul></div></div>
+    <p class="transformation-note">Transforma&ccedil;&otilde;es esperadas em engajamentos de arquitetura de conhecimento para empresas t&eacute;cnicas.</p>
+  </section>
+
+  <hr class="divider">
+
+  <section class="entry observe"><div class="entry-layout"><div class="entry-content"><div class="section-eyebrow">Ponto de Entrada</div><div class="entry-badge">Engajamento Inicial</div><h2 class="entry-title">AI Intelligence Audit</h2><p class="entry-desc">O ponto de entrada para todo o restante. Todo engajamento come&ccedil;a com uma leitura precisa de como sua empresa existe hoje dentro de sistemas de IA, onde est&atilde;o os gaps conceituais e estruturais, e o que precisa ser constru&iacute;do.</p><p class="entry-rec">Recomendado para empresas em est&aacute;gio de diagn&oacute;stico estrutural.</p></div><div class="entry-includes"><div class="entry-includes-label">Inclui</div><ul class="entry-includes-list"><li>Leitura da representa&ccedil;&atilde;o atual da empresa em IA</li><li>An&aacute;lise de narrativa e consist&ecirc;ncia sem&acirc;ntica</li><li>Diagn&oacute;stico de gaps conceituais e estruturais</li><li>Recomenda&ccedil;&atilde;o de arquitetura futura</li></ul><div class="entry-output">Entrega: <strong>Relat&oacute;rio estrat&eacute;gico + Roadmap de arquitetura</strong></div></div></div></section>
+
+  <hr class="divider--subtle divider">
+
+  <section class="exclusion observe"><div class="exclusion-content"><div class="section-eyebrow">Filtro de Engajamento</div><h2 class="exclusion-title">Este trabalho n&atilde;o &eacute; para</h2><ul class="exclusion-list"><li>Empresas buscando marketing de curto prazo</li><li>Demandas puramente promocionais</li><li>Opera&ccedil;&otilde;es sem necessidade de estrutura conceitual ou base para IA</li></ul></div></section>
+
+  <hr class="divider">
+
+  <section class="principal observe"><div class="principal-layout"><div class="principal-portrait"><div class="principal-photo"><span class="principal-photo-placeholder">Retrato</span></div></div><div class="principal-content"><div class="principal-identity"><div class="principal-kicker">Origem do M&eacute;todo</div><h3 class="principal-name">Lais Oliveira</h3><div class="principal-role">Fundadora / Knowledge Systems Architect</div><div class="principal-role-sub">Criadora do NeuroSaaS&trade;</div></div><div class="principal-text"><p>Esse m&eacute;todo surgiu da necessidade de estruturar, documentar e tornar operacional o conhecimento de empresas constru&iacute;das pela pr&oacute;pria fundadora &mdash; da arquitetura conceitual &agrave; base sem&acirc;ntica necess&aacute;ria para interpreta&ccedil;&atilde;o por IA, mercado e sistemas internos.</p><p>Com trajet&oacute;ria enraizada em dados, an&aacute;lise, sistemas e constru&ccedil;&atilde;o de empresas, sua abordagem se concentra em transformar conhecimento disperso em infraestrutura institucional clara, operacional, interpret&aacute;vel e dur&aacute;vel.</p></div><div class="principal-domains"><div class="principal-domains-label">Dom&iacute;nios Centrais</div><div class="principal-domains-list"><span class="domain-tag">Knowledge Architecture</span><span class="domain-tag">Semantic Engineering</span><span class="domain-tag">Data Systems</span><span class="domain-tag">Analytical Intelligence</span><span class="domain-tag">AI Infrastructure</span></div></div></div></div></section>
+
+  <hr class="divider">
+
+  <section class="cta observe"><p class="cta-declaration">A clareza institucional n&atilde;o &eacute; acess&oacute;ria. &Eacute; infraestrutura.</p><p class="cta-premise">O AI Intelligence Audit &eacute; o ponto de entrada para todo o restante.</p><div class="cta-buttons"><a href="mailto:contato@falxsystems.com?subject=Solicita%C3%A7%C3%A3o%20%E2%80%93%20AI%20Intelligence%20Audit" class="cta-action"><span>Solicitar Diagn&oacute;stico Inicial</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="cta-action cta-action--secondary" onclick="document.getElementById('origin').classList.add('is-open')"><span>Acessar a Origem</span></a></div><p class="cta-qualifier">Para empresas t&eacute;cnicas, produtos digitais complexos e opera&ccedil;&otilde;es em fase de consolida&ccedil;&atilde;o estrutural.</p></section>
+
+  <hr class="divider--subtle divider">
+  <footer class="footer"><div class="footer-wordmark">FALX Systems &copy; 2026</div><div class="footer-descriptor">Arquitetura de Conhecimento &amp; Intelig&ecirc;ncia Institucional</div></footer>
+</div>
+
+<div class="origin-overlay" id="origin">
+  <button class="origin-close" onclick="this.parentElement.classList.remove('is-open')">&times;</button>
+  <div class="origin-inner">
+    <div class="origin-left"><div class="origin-identity"><div class="origin-kicker">Acessar a Origem</div><h2 class="origin-name">Lais Oliveira</h2><div class="origin-role">Founder / Knowledge Systems Architect</div><div class="origin-role-sub">Criadora do NeuroSaaS&trade;</div></div><p class="origin-bio">Este m&eacute;todo surgiu da necessidade de estruturar, documentar e tornar operacional o conhecimento de empresas t&eacute;cnicas &mdash; da arquitetura conceitual &agrave; base sem&acirc;ntica necess&aacute;ria para interpreta&ccedil;&atilde;o por IA, mercado e sistemas internos. Hoje, essa abordagem tamb&eacute;m evolui na cria&ccedil;&atilde;o do NeuroSaaS&trade;.</p><div class="origin-neuro"><h3 class="origin-neuro-title">NeuroSaaS&trade;</h3><div class="origin-neuro-sub">A pr&oacute;xima camada dos sistemas baseados em conhecimento</div><p class="origin-neuro-desc">Uma arquitetura de software orientada por conhecimento estruturado, em que sistemas n&atilde;o apenas executam fun&ccedil;&otilde;es, mas interpretam, organizam e operam sobre uma base sem&acirc;ntica cont&iacute;nua.</p><p class="origin-neuro-punch">N&atilde;o &eacute; software como servi&ccedil;o. &Eacute; conhecimento como infraestrutura operacional.</p></div></div>
+    <div class="origin-right"><div class="origin-qualify"><div class="origin-qualify-title">Este trabalho &eacute; especialmente &uacute;til quando</div><ul class="origin-qualify-list"><li>Sua empresa &eacute; mal interpretada por IA</li><li>O conhecimento est&aacute; fragmentado e sem fonte can&ocirc;nica</li><li>A base institucional ainda n&atilde;o est&aacute; pronta para IA interna</li></ul></div><div class="origin-channels"><div class="origin-channels-title">Presen&ccedil;a Institucional</div><div class="origin-channel"><div class="origin-channel-name">LinkedIn</div><div class="origin-channel-desc">Trajet&oacute;ria profissional, hist&oacute;rico e presen&ccedil;a p&uacute;blica</div></div><div class="origin-channel"><div class="origin-channel-name">Contato Direto</div><div class="origin-channel-desc">Canal para diagn&oacute;stico, escopo e alinhamento estrat&eacute;gico</div></div></div><div class="origin-actions"><div class="origin-actions-title">Escolha a interface de entrada</div><a href="mailto:contato@falxsystems.com?subject=Solicita%C3%A7%C3%A3o%20%E2%80%93%20AI%20Intelligence%20Audit" class="origin-btn origin-btn--primary">Solicitar AI Intelligence Audit</a><a href="https://www.linkedin.com/in/falx" target="_blank" rel="noopener" class="origin-btn origin-btn--secondary">Ver presen&ccedil;a profissional</a></div><p class="origin-micro">Toda arquitetura come&ccedil;a com uma leitura precisa da realidade atual.</p></div>
+  </div>
+</div>
+
+<script>
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)} });
+  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.observe,.observe-stagger').forEach(el => io.observe(el));
+  const sio = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting){
+      Array.from(e.target.children).forEach((c,i) => { c.style.transitionDelay = (i*0.1)+'s'; });
+      e.target.classList.add('is-visible'); sio.unobserve(e.target);
+    }});
+  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.observe-stagger').forEach(el => sio.observe(el));
+  document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('origin').classList.remove('is-open'); });
+  document.getElementById('origin').addEventListener('click', e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('is-open'); });
+  const nav = document.querySelector('.nav');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(!ticking){ requestAnimationFrame(() => { nav.classList.toggle('is-scrolled', window.scrollY>60); ticking=false; }); ticking=true; }
+  }, { passive: true });
+  // Phase selector logic
+  const tabs = document.querySelectorAll('.phase-tab');
+  const clusters = document.querySelectorAll('.cluster[data-cluster]');
+  const packageBanner = document.getElementById('package-banner');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      const phase = tab.dataset.phase;
+      if (phase === 'all') {
+        packageBanner.classList.remove('is-hidden');
+        clusters.forEach(c => c.classList.remove('is-hidden'));
+      } else {
+        packageBanner.classList.add('is-hidden');
+        clusters.forEach(c => {
+          if (c.dataset.cluster === phase) { c.classList.remove('is-hidden'); }
+          else { c.classList.add('is-hidden'); }
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

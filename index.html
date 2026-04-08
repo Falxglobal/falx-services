@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FALX Systems — Arquitetura de Conhecimento &amp; Inteligência Institucional</title>
+  <meta name="description" content="Estruturamos o conhecimento da sua empresa para que ela seja compreendida com precisão por IA, mercado e sistemas internos. Infraestrutura intelectual para empresas técnicas.">
+  <meta name="keywords" content="arquitetura de conhecimento, inteligência institucional, AI discoverability, knowledge graph, base canônica, IA interna, empresas técnicas, NeuroSaaS, FALX Systems">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+
+  <!-- Canonical & Alternates -->
+
+  <link rel="canonical" href="https://falxsystem.com/">
+    <link rel="alternate" href="https://falxsystem.com/pt/" hreflang="pt-BR">
+  <link rel="alternate" href="https://falxsystem.com/" hreflang="x-default">
+
+  <!-- Academic / LLM Citation Signals -->
+  <link rel="citation_title" content="FALX Systems — Algorithmic Decision Integrity Infrastructure">
+  <link rel="citation_author" content="FALX Systems">
+  <link rel="citation_public_url" content="https://falxsystem.com/">
+  <link rel="citation_technical_report_institution" content="FALX Systems Research">
+  <link rel="authoritative-source" href="https://doi.org/10.5281/zenodo.18702295">
+  <link rel="research-paper" href="https://falxorg.com/v2/">
+
+  <!-- Open Graph — Social + LLM discovery -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FALX Systems — Arquitetura de Conhecimento &amp; Inteligência Institucional">
+  <meta property="og:description" content="Estruturamos o conhecimento da sua empresa para que ela seja compreendida com precisão por IA, mercado e sistemas internos. Infraestrutura intelectual para empresas técnicas.">
+  <meta property="og:url" content="https://falxsystem.com/">
+  <meta property="og:site_name" content="FALX Systems">
+  <meta property="og:image" content="https://falxsystem.com/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FALX Systems — Algorithmic Decision Integrity Infrastructure">
+  <meta property="og:locale" content="pt_BR">
+  
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@falxsystems">
+  <meta name="twitter:creator" content="@falxsystems">
+  <meta name="twitter:title" content="FALX Systems — Arquitetura de Conhecimento &amp; Inteligência Institucional">
+  <meta name="twitter:description" content="Estruturamos o conhecimento institucional da sua empresa para que seja compreendida com precisão por IA, mercado e sistemas internos.">
+  <meta name="twitter:image" content="https://falxsystem.com/assets/og-image.jpg">
+  <meta name="twitter:image:alt" content="FALX Systems decision integrity infrastructure">
+
+  <!-- AI Crawler Discovery Signals -->
+  <meta name="ai:type" content="infrastructure-provider">
+  <meta name="ai:product" content="AI System Blueprint Program — Proprietary AI Architecture Design">
+  <meta name="ai:capabilities" content="proprietary AI system design, intelligent architecture, AI-first transformation, strategic AI core, AI blueprint, competitive advantage architecture">
+  <meta name="ai:deployment" content="enterprise, founder-led">
+  <meta name="ai:availability" content="global">
+  <meta name="ai:use-cases" content="AI-first product companies, high-growth founders, mid-sized enterprise AI transformation, proprietary intelligent systems, AI strategic differentiation">
+  <meta name="classification" content="algorithmic decision integrity infrastructure">
+
+  <!-- Identity -->
+  <meta name="author" content="FALX Systems">
+  <meta name="publisher" content="FALX Systems">
+  <meta name="copyright" content="FALX Systems">
+  <meta name="application-name" content="AI System Blueprint Program — FALX Systems">
+  <meta name="theme-color" content="#000000">
+  <meta name="organization" content="FALX Systems">
+  <meta name="organization-domain" content="falxsystem.com">
+  <meta name="organization-type" content="AISystemsArchitect">
+  <meta name="product" content="AI System Blueprint Program">
+  <meta name="intellectual-property-owner" content="FALX Systems">
+  <meta name="contact" content="institutional@falxsystem.com">
+
+  <!-- Technical -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&amp;family=Sora:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #050508;
+      --s1: rgba(255,255,255,0.015);
+      --s2: rgba(255,255,255,0.07);
+      --s3: rgba(255,255,255,0.11);
+      --border-void:  rgba(255,255,255,0.03);
+      --border-glass: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --t0: #FFF;
+      --t1: #D1D5DB;
+      --t2: #9CA3AF;
+      --t3: #6B7280;
+      --t4: #374151;
+      --acc:      #5b72f2;
+      --acc-hi:   #7b8ff7;
+      --acc-lo:   #3a52d4;
+      --acc-dim:  rgba(58,82,212,0.07);
+      --acc-mid:  rgba(91,114,242,0.16);
+      --acc-glow: rgba(91,114,242,0.28);
+      --bg-nebula-a: radial-gradient(ellipse at 70% 30%, rgba(58,82,212,0.13) 0%, rgba(91,114,242,0.06) 35%, transparent 65%);
+      --bg-nebula-b: radial-gradient(ellipse at 20% 60%, rgba(91,114,242,0.10) 0%, rgba(58,82,212,0.04) 40%, transparent 70%);
+      --bg-nebula-c: radial-gradient(ellipse at 50% 50%, rgba(58,82,212,0.08) 0%, rgba(123,143,247,0.03) 45%, transparent 68%);
+      --bg-accent-strip: linear-gradient(90deg, transparent 0%, rgba(91,114,242,0.12) 40%, rgba(123,143,247,0.08) 60%, transparent 100%);
+      --line-acc: linear-gradient(90deg, transparent, rgba(91,114,242,0.55), rgba(123,143,247,0.3), transparent);
+      --fs-h1:    clamp(2.134rem, 4vw, 3.686rem);
+      --fs-h2:    clamp(1.552rem, 2.4vw, 2.134rem);
+      --fs-h3:    1.2rem;
+      --fs-body:  1rem;
+      --fs-label: 0.65rem;
+      --fs-micro: 0.52rem;
+      --f-display: 'Sora', sans-serif;
+      --f-mono:    'JetBrains Mono', monospace;
+      --g:   6vw;
+      --xs:  0.5rem;
+      --sm:  1rem;
+      --md:  1.5rem;
+      --lg:  2rem;
+      --xl:  3rem;
+      --2xl: 4rem;
+      --3xl: 6rem;
+      --ease:     cubic-bezier(0.16,1,0.3,1);
+      --ease-std: cubic-bezier(0.4,0,0.2,1);
+      --f-body:    'Sora', sans-serif;
+      --fs-small:  0.875rem;
+      --content-max: 1200px;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    body { background: var(--void); color: var(--t0); font-family: var(--f-display); overflow-x: hidden; line-height: 1.5; font-weight: 300; cursor: default; }
+
+    ::selection { background: rgba(91,114,242,.35); color: #fff; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(91,114,242,.3); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(91,114,242,.6); }
+
+    .skip-link { position:absolute; top:-100px; left:var(--g); z-index:9999; background:var(--acc); color:#fff; padding:.5rem 1rem; font-family: var(--f-mono); font-size: var(--fs-label); text-decoration:none; border-radius:2px; transition: top .2s ease; }
+    .skip-link:focus { top:var(--md); }
+
+    .noise { position: fixed; inset: 0; opacity: .04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; }
+
+    nav { position: fixed; top:0; left:0; right:0; padding: var(--md) var(--g); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-void); background: rgba(0,0,0,.85); backdrop-filter: blur(20px) saturate(180%); z-index: 1000; transition: all .4s var(--ease-std); }
+    nav.scrolled { background: rgba(0,0,0,.96); border-bottom-color: var(--border-glass); }
+    .brand { font-family: var(--f-mono); font-size: calc(var(--fs-label) * 1.8384); letter-spacing: .3em; text-transform: uppercase; font-weight: 600; color: var(--t0); opacity: .9; }
+    .nav-actions { display:flex; align-items:center; gap: var(--lg); }
+    .system-status { font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.8384); color: var(--t2); letter-spacing: .12em; animation: blink 3s infinite; display: flex; align-items: center; gap: var(--xs); }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.55} }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.15} }
+    .nav-cta {
+      display: inline-flex; align-items: center;
+      background: transparent;
+      border: none;
+      color: var(--t1);
+      padding: var(--xs) var(--lg);
+      text-decoration: none;
+      font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.8384);
+      letter-spacing: .18em; text-transform: uppercase; font-weight: 500;
+      transition: color .4s var(--ease), letter-spacing .4s var(--ease);
+      position: relative;
+    }
+    /* outer border — 4 segments, animated */
+    .nav-cta::before {
+      content:'';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(91,114,242,.5), rgba(91,114,242,.5)) top left / 0% 1px no-repeat,
+        linear-gradient(90deg, rgba(91,114,242,.5), rgba(91,114,242,.5)) bottom right / 0% 1px no-repeat,
+        linear-gradient(180deg, rgba(91,114,242,.5), rgba(91,114,242,.5)) top right / 1px 0% no-repeat,
+        linear-gradient(180deg, rgba(91,114,242,.5), rgba(91,114,242,.5)) bottom left / 1px 0% no-repeat;
+      transition: background-size .45s var(--ease);
+    }
+    .nav-cta:hover::before {
+      background:
+        linear-gradient(90deg, rgba(91,114,242,.6), rgba(91,114,242,.6)) top left / 100% 1px no-repeat,
+        linear-gradient(90deg, rgba(91,114,242,.6), rgba(91,114,242,.6)) bottom right / 100% 1px no-repeat,
+        linear-gradient(180deg, rgba(91,114,242,.6), rgba(91,114,242,.6)) top right / 1px 100% no-repeat,
+        linear-gradient(180deg, rgba(91,114,242,.6), rgba(91,114,242,.6)) bottom left / 1px 100% no-repeat;
+    }
+    /* corner brackets */
+    .nav-cta::after {
+      content:'';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(123,143,247,.9), rgba(123,143,247,.9)) top left / 8px 1px no-repeat,
+        linear-gradient(90deg, rgba(123,143,247,.9), rgba(123,143,247,.9)) bottom right / 8px 1px no-repeat,
+        linear-gradient(180deg, rgba(123,143,247,.9), rgba(123,143,247,.9)) top left / 1px 8px no-repeat,
+        linear-gradient(180deg, rgba(123,143,247,.9), rgba(123,143,247,.9)) bottom right / 1px 8px no-repeat;
+    }
+    .nav-cta:hover { color: var(--t0); letter-spacing:.22em; }
+    .nav-cta span { position: relative; z-index: 1; }
+
+    /* ── HERO — Editorial Typographic ────────────────── */
+    .hero-section { min-height: 100vh; padding: calc(80px + 10vh) var(--g) 5vh; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+    .hero-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 68% 18%, rgba(58,82,212,.18) 0%, rgba(91,114,242,.09) 35%, transparent 62%), radial-gradient(ellipse at 12% 72%, rgba(91,114,242,.12) 0%, transparent 52%), radial-gradient(ellipse at 50% 95%, rgba(58,82,212,.06) 0%, transparent 50%); pointer-events: none; }
+    .hero-eyebrow-row { display: flex; justify-content: space-between; align-items: center; opacity: 0; animation: fade-up .8s cubic-bezier(.16,1,.3,1) .1s forwards; }
+    .hero-eyebrow { font-family: var(--f-mono); font-size: var(--fs-micro); color: var(--acc); letter-spacing: .28em; text-transform: uppercase; opacity: .85; }
+    .hero-text { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 6vh 0 4vh; }
+    .hero-title { font-family: var(--f-display); font-size: clamp(2.8rem, 5.8vw, 6rem); line-height: 1.06; font-weight: 200; letter-spacing: -.04em; max-width: 22ch; background: linear-gradient(160deg, #ffffff 0%, rgba(255,255,255,.82) 60%, rgba(255,255,255,.6) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0; animation: fade-up 1.2s cubic-bezier(.16,1,.3,1) .35s forwards; margin-bottom: 0; }
+    @keyframes fade-up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+    .hero-divider { width: 80px; height: 1px; background: linear-gradient(90deg, rgba(91,114,242,1), rgba(123,143,247,.4), transparent); margin: 3rem 0 2.4rem; flex-shrink: 0; }
+    .hero-subtitle-block { display: grid; grid-template-columns: 1fr 1fr; gap: var(--g); max-width: 1100px; opacity: 0; animation: fade-up 1.2s cubic-bezier(.16,1,.3,1) .7s forwards; }
+    .hero-subtitle { font-family: var(--f-display); font-size: clamp(.95rem, 1.3vw, 1.2rem); line-height: 1.75; font-weight: 300; letter-spacing: -.01em; color: rgba(255,255,255,.78); margin: 0; }
+    .hero-metrics { display: flex; align-items: center; gap: var(--g); padding-top: 3rem; border-top: 1px solid rgba(255,255,255,.12); opacity: 0; animation: fade-up 1s cubic-bezier(.16,1,.3,1) 1s forwards; }
+    .hero-metric { display: flex; flex-direction: column; gap: .3rem; }
+    .hero-metric-num { font-family: var(--f-mono); font-size: clamp(1.4rem, 2vw, 1.9rem); color: var(--t0); letter-spacing: -.02em; font-weight: 300; line-height: 1; }
+    .hero-metric-label { font-family: var(--f-mono); font-size: var(--fs-micro); color: var(--t1); letter-spacing: .2em; text-transform: uppercase; }
+    .hero-metric-sep { width: 1px; height: 36px; background: rgba(255,255,255,.14); flex-shrink: 0; }
+    .hero-cta-wrap { margin-left: auto; }
+
+    .structural-problem { background: var(--void); border-top: 1px solid var(--s3); position:relative; overflow:hidden; }
+    .structural-problem::before { content:''; position:absolute; top:-200px; left:-200px; width:900px; height:900px; background: radial-gradient(ellipse at 20% 20%, rgba(58,82,212,0.14) 0%, rgba(91,114,242,0.07) 40%, transparent 68%); pointer-events:none; z-index:0; }
+    .sp-layout { position:relative; z-index:1; }
+    .sp-top-row { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 7.5rem var(--g); border-bottom: 1px solid var(--s2); }
+    .sp-sidebar-header { padding: 0; }
+    .eyebrow { font-family: var(--f-mono); font-size: var(--fs-micro); color:var(--acc); letter-spacing:.26em; text-transform:uppercase; opacity:.55; display:block; }
+    .oh-title { font-family: var(--f-display); font-size: calc(var(--fs-h2) * 2.3426); font-weight:200; color:var(--t0); letter-spacing:-.03em; line-height:1.1; margin-top:0; text-align: center; }
+    .oh-title strong { font-weight:500; }
+    .sp-status-pill { display:inline-flex; align-items:center; gap:.5rem; padding:.32rem .85rem; margin-top:1.2rem; border: 1px solid rgba(91,114,242,.18); background: var(--acc-dim); }
+    .sp-dot { width:5px; height:5px; border-radius:50%; background:var(--acc); animation: pulse-dot 2s ease-in-out infinite; flex-shrink:0; }
+    .sp-pill-txt { font-family: var(--f-mono); font-size: var(--fs-micro); color:var(--acc); letter-spacing:.14em; text-transform:uppercase; }
+    .sp-problem-body { padding: 3rem 0 0; max-width: 960px; width: 100%; text-align: center; }
+    .sp-problem-body p { font-family: var(--f-display); font-size: 1.5924rem; font-weight:200; color:var(--t2); line-height:1.65; letter-spacing:-.01em; }
+    .sp-problem-body p + p { margin-top:1.6rem; }
+    .sp-problem-body .sp-em { color:var(--t1); font-weight:400; }
+
+    .sp-glow-cards { display:grid; grid-template-columns:repeat(3,1fr); border-top: 1px solid var(--s2); }
+    .sp-glow-card { padding: 4.48rem var(--g); border-right: 1px solid var(--s2); position:relative; cursor:pointer; overflow:hidden; transition: background .4s var(--ease); display:flex; flex-direction:column; gap:1.2rem; }
+    .sp-glow-card:last-child { border-right:none; }
+    .sp-glow-card::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 50% 0%, rgba(58,82,212,0.14) 0%, rgba(91,114,242,0.06) 35%, transparent 62%), radial-gradient(ellipse at 90% 80%, rgba(123,143,247,0.07) 0%, transparent 50%); opacity:0; transition:opacity .5s var(--ease); pointer-events:none; }
+    .sp-glow-card::after { content:''; position:absolute; top:0; left:0; right:0; height:1px; background: linear-gradient(90deg,transparent,var(--acc-hi),var(--acc),transparent); opacity:0; transition:opacity .35s var(--ease); }
+    .sp-glow-card:hover::before { opacity:1; }
+    .sp-glow-card:hover::after  { opacity:1; }
+    .sp-glow-card:hover         { background: rgba(58,82,212,.05); box-shadow: inset 0 0 40px rgba(58,82,212,.08), 0 0 0 1px rgba(91,114,242,.08); }
+    .sp-gc-num { font-family: var(--f-mono); font-size: var(--fs-micro); color:var(--acc); opacity:.9; letter-spacing:.2em; text-transform:uppercase; }
+    .sp-gc-title { font-family: var(--f-display); font-size: 1.6587rem; font-weight:400; color:var(--t0); letter-spacing:-.025em; line-height:1.15; position:relative; z-index:1; }
+    .sp-gc-text { font-family: var(--f-display); font-size: 1.4744rem; font-weight:300; color:var(--t1); line-height:1.65; position:relative; z-index:1; }
+
+    .ns-definition { border-top: 1px solid var(--s2); border-bottom: 1px solid var(--s2); position:relative; overflow:hidden; }
+    .ns-definition::before { content:''; position:absolute; top:-80px; right:-80px; width:600px; height:600px; background: radial-gradient(ellipse,rgba(58,82,212,0.06) 0%,transparent 65%); pointer-events:none; }
+    .ns-def-inner { display:grid; grid-template-columns:1fr 1fr; min-height:480px; }
+    .ns-def-left { padding: 4.48rem var(--g); background: linear-gradient(145deg, rgba(58,82,212,0.18) 0%, rgba(91,114,242,0.10) 45%, rgba(30,42,160,0.06) 100%), radial-gradient(ellipse at 100% 0%, rgba(123,143,247,0.14) 0%, transparent 50%); border-right:1px solid rgba(91,114,242,0.5); display:flex; flex-direction:column; justify-content:flex-start; gap:2.8rem; position:relative; z-index:1; }
+    .ns-def-mark { font-family: var(--f-mono); font-size: var(--fs-micro); color:var(--acc); letter-spacing:.26em; text-transform:uppercase; opacity:.85; display:flex; align-items:center; gap:.8rem; }
+    .ns-def-mark::before { content:''; width:3px; height:3px; border-radius:50%; background:var(--acc); opacity:.7; animation: pulse-dot 2.4s ease-in-out infinite; flex-shrink:0; }
+    .ns-wordmark { font-family: var(--f-display); font-size: var(--fs-h1); font-weight:800; letter-spacing:-.04em; color:var(--t0); line-height:.9; }
+    .ns-wordmark sup { font-size:.22em; vertical-align:super; color:var(--acc); font-weight:400; letter-spacing:.06em; }
+    .ns-def-text { font-family: var(--f-display); font-size: 1.4744rem; font-weight:300; color:var(--t2); line-height:1.65; max-width:400px; }
+    .ns-def-text p + p { margin-top:1.4rem; }
+    .ns-def-text strong { color:var(--t1); font-weight:400; }
+    .ns-def-text em { font-style:normal; color:var(--acc); }
+    .ns-def-right { padding: 4.48rem var(--g); background: linear-gradient(145deg, rgba(30,42,160,0.04) 0%, rgba(91,114,242,0.04) 60%, transparent 100%); border-left:none; display:flex; flex-direction:column; justify-content:flex-start; gap:2.8rem; position:relative; z-index:1; }
+    .ns-class-label { font-family: var(--f-mono); font-size: var(--fs-micro); color:var(--acc); letter-spacing:.22em; text-transform:uppercase; opacity:.9; }
+    .ns-class-heading { font-family: var(--f-display); font-size: var(--fs-h2); font-weight:200; color:var(--t0); letter-spacing:-.03em; line-height:1.25; }
+    .ns-class-items { display:flex; flex-direction:column; gap:0; list-style:none; }
+    .ns-class-items li { display:flex; align-items:center; gap:.8rem; font-family: var(--f-mono); font-size: calc(var(--fs-label) * 1.4882); color:var(--t1); letter-spacing:.1em; text-transform:uppercase; padding:.945rem 0; border-bottom:1px solid var(--s2); transition: all .3s ease; cursor:default; }
+    .ns-class-items li:last-child { border-bottom:none; }
+    .ns-class-items li::before { content:''; width:3px; height:3px; border-radius:50%; background:var(--acc); opacity:.4; flex-shrink:0; transition: opacity .3s ease, box-shadow .3s ease; }
+    .ns-class-items li:hover { color:var(--t1); padding-left:.3rem; }
+    .ns-class-items li:hover::before { opacity:1; box-shadow:0 0 6px var(--acc); }
+
+    .inevitability { padding: 10.5rem var(--g); border-top: 1px solid rgba(91,114,242,.18); border-bottom: 1px solid rgba(91,114,242,.18); position:relative; overflow:hidden; background: linear-gradient(180deg, rgba(58,82,212,0.03) 0%, rgba(58,82,212,0.10) 40%, rgba(91,114,242,0.07) 60%, rgba(58,82,212,0.03) 100%), radial-gradient(ellipse at 55% 50%, rgba(123,143,247,0.09) 0%, transparent 60%); }
+    .inevitability::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background: linear-gradient(90deg, transparent, rgba(91,114,242,0.85), rgba(123,143,247,0.55), transparent); }
+    .inevitability-inner { max-width:800px; margin: 0 auto; display:flex; flex-direction:column; gap:1.2rem; text-align:center; }
+    .inevitability p { font-family: var(--f-display); font-size: 1.9167rem; font-weight:200; line-height:1.65; letter-spacing:-.02em; color:var(--t2); }
+    .inevitability p.conclusion { color:var(--t0); font-weight:200; font-family: var(--f-display); font-size: calc(var(--fs-h2) * 2.2376); letter-spacing:-.03em; line-height:1.1; }
+
+    .v1-divider { display:flex; align-items:center; gap:2rem; padding: 1.6rem var(--g); border-bottom: 1px solid var(--s2); position:relative; z-index:1; }
+    .v1-divider-tag { font-family: var(--f-mono); font-size: var(--fs-micro); color:var(--acc); letter-spacing:.22em; text-transform:uppercase; opacity:.85; white-space:nowrap; }
+    .v1-divider-line { flex:1; height:1px; background: linear-gradient(90deg,var(--s3),transparent); }
+    .v1-pillars { display:grid; grid-template-columns:repeat(2,1fr); border-bottom: 1px solid var(--s2); position:relative; z-index:1; }
+    .v1-pillar:nth-child(even) { border-right: none; }
+    .v1-pillar:nth-child(n+3) { border-top: 1px solid var(--s2); }
+    .v1-pillar { padding: 4.48rem var(--g); border-right: 1px solid var(--s2); display:flex; flex-direction:column; gap:1.2rem; cursor:default; transition: background .4s var(--ease); position:relative; overflow:hidden; }
+    .v1-pillar:last-child { border-right:none; }
+    .v1-pillar:hover { background: rgba(58,82,212,.04); }
+    .v1-pillar::after { content:''; position:absolute; top:0; left:0; right:0; height:1px; background: linear-gradient(90deg,transparent,var(--acc-hi),var(--acc),transparent); transform:scaleX(0); transform-origin:left; transition: transform .5s var(--ease); opacity:.8; }
+    .v1-pillar:hover::after { transform:scaleX(1); }
+    .v1-p-index { font-family: var(--f-mono); font-size: var(--fs-micro); color:var(--acc); opacity:.85; letter-spacing:.18em; text-transform:uppercase; transition: opacity .3s ease; }
+    .v1-pillar:hover .v1-p-index { opacity:.9; }
+    .v1-p-name { font-family: var(--f-display); font-size: var(--fs-h3); font-weight:200; color:var(--t1); letter-spacing:-.02em; transition: color .3s ease; }
+    .v1-pillar:hover .v1-p-name { color:var(--t0); }
+    .v1-p-rule { width:24px; height:1px; background:var(--acc); opacity:.6; transition: width .4s var(--ease), opacity .3s ease; }
+    .v1-pillar:hover .v1-p-rule { width:56px; opacity:1; }
+    .v1-p-desc { font-family: var(--f-display); font-size: 1.9167rem; font-weight:300; color:var(--t2); line-height:1.55; transition: color .3s ease; }
+    .v1-pillar:hover .v1-p-desc { color:var(--t2); }
+
+    .v1-close { padding: var(--3xl) var(--g); display:flex; justify-content:center; align-items:center; position:relative; z-index:1; border-top: 1px solid var(--s2); }
+    .v1-close-line { width:1px; height:60px; background: linear-gradient(180deg,var(--acc) 0%,transparent 100%); opacity:.3; flex-shrink:0; margin-top:.3rem; }
+    .v1-close-text { font-family: var(--f-display); font-size: 1.9167rem; font-weight:300; color:var(--t2); line-height:1.65; max-width:960px; text-align:center; }
+    .v1-close-text em     { font-style:normal; color:var(--t2); }
+    .v1-close-text strong { color:var(--t1); font-weight:400; }
+
+    .access-protocol { background: var(--void); border-top: 1px solid var(--s2); position:relative; overflow:hidden; }
+    .access-protocol::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background: linear-gradient(90deg, transparent, rgba(91,114,242,0.9), rgba(123,143,247,0.55), transparent); }
+    .access-protocol::after { content:''; position:absolute; bottom:-200px; right:-200px; width:700px; height:700px; background: radial-gradient(ellipse at 60% 60%, rgba(58,82,212,0.08) 0%, rgba(91,114,242,0.03) 45%, transparent 68%), radial-gradient(ellipse at 20% 20%, rgba(123,143,247,0.04) 0%, transparent 58%); pointer-events:none; z-index:0; }
+    .ap-inner { display:flex; flex-direction:column; gap: 0; width:100%; position:relative; z-index:1; padding: 8rem var(--g); margin:0 auto; align-items: stretch; }
+    .ap-form-wrap { max-width: 720px; width: 100%; margin: 0 auto; }
+    .ap-bottom { display:grid; grid-template-columns:1fr 1fr; gap:0; border-top: 1px solid rgba(255,255,255,.08); margin-top: 5rem; }
+    .ap-bottom-left { padding: 3.5rem var(--g) 3.5rem 0; border-right: 1px solid rgba(255,255,255,.08); display:flex; flex-direction:column; gap:2rem; }
+    .ap-bottom-right { padding: 3.5rem 0 3.5rem var(--g); display:flex; flex-direction:column; gap:1rem; }
+    @media (max-width: 768px) {
+      .ap-bottom { grid-template-columns: 1fr; }
+      .ap-bottom-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); padding: 3rem 0; }
+      .ap-bottom-right { padding: 3rem 0 0; }
+    }
+    .ap-protocol-tag { font-family: var(--f-mono); font-size: var(--fs-micro); color:var(--acc); letter-spacing:.28em; text-transform:uppercase; opacity:.8; display:flex; align-items:center; gap:.8rem; }
+    .ap-protocol-tag::before { content:''; width:3px; height:3px; border-radius:50%; background:var(--acc); animation: pulse-dot 2s ease-in-out infinite; flex-shrink:0; }
+    .ap-headline { font-family: var(--f-display); font-size: calc(var(--fs-h2) * 1.5932); font-weight:200; line-height:1.1; letter-spacing:-.03em; color:var(--t0); }
+    .ap-body { font-family: var(--f-display); font-size: 1.4744rem; font-weight:300; line-height:1.65; color:var(--t1); max-width:100%; }
+    .ap-steps { list-style:none; border-top:1px solid rgba(255,255,255,.1); }
+    .ap-step { display:flex; align-items:center; gap:1.4rem; padding:1.1rem 0; border-bottom:1px solid rgba(255,255,255,.08); cursor:default; transition: color .3s ease, padding-left .3s var(--ease); }
+    .ap-step:hover { padding-left:.5rem; }
+    .ap-step-num { font-family: var(--f-mono); font-size: var(--fs-micro); color:var(--acc); opacity:.8; flex-shrink:0; transition: opacity .3s ease; }
+    .ap-step:hover .ap-step-num { opacity:1; }
+    .ap-step-label { font-family: var(--f-mono); font-size: 1.0182rem; color:var(--t1); letter-spacing:.12em; text-transform:uppercase; transition:color .3s ease; }
+    .ap-step:hover .ap-step-label { color:var(--t0); }
+    .ap-right { display:flex; flex-direction:column; }
+    .ap-form-header { padding-bottom:2rem; border-bottom:1px solid rgba(255,255,255,.1); margin-bottom:0; }
+    .ap-form-tag { font-family: var(--f-mono); font-size: calc(var(--fs-label) * 2.3899); color:var(--t1); letter-spacing:.22em; text-transform:uppercase; }
+    .ap-form { display:flex; flex-direction:column; gap:0; max-width:100%; }
+    .ap-field { position:relative; border-bottom:1px solid rgba(255,255,255,.1); transition: border-color .3s ease; }
+    .ap-field:focus-within { border-color:rgba(91,114,242,.45); }
+    .ap-field label { display:block; font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 2.3899); color:var(--t2); letter-spacing:.2em; text-transform:uppercase; padding: 1.4rem 0 .3rem; transition: color .3s ease; }
+    .ap-field:focus-within label { color:var(--acc); }
+    .ap-field input, .ap-field textarea { width:100%; background:transparent; border:none; outline:none; font-family: var(--f-display); font-size: calc(var(--fs-body) * 2.3899); font-weight:300; color:var(--t0); padding:.1rem 0 1.3rem; line-height:1.5; caret-color:var(--acc); resize:none; }
+    .ap-field input::placeholder, .ap-field textarea::placeholder { color:var(--t4); font-size: calc(var(--fs-body) * 2.3899); }
+    .ap-field textarea { min-height:80px; }
+    .ap-field::after { content:''; position:absolute; bottom:-1px; left:0; width:0; height:1px; background: linear-gradient(90deg, var(--acc), var(--acc-hi)); transition: width .45s var(--ease); box-shadow: 0 0 8px rgba(91,114,242,.4); }
+    .ap-field:focus-within::after { width:100%; }
+    .ap-submit {
+      display:inline-flex; align-items:center; justify-content:space-between;
+      margin-top:2.8rem; padding: 1.4rem 2rem;
+      font-family: var(--f-mono); font-size: calc(var(--fs-label) * 1.5933); font-weight:500;
+      letter-spacing:.22em; text-transform:uppercase;
+      color:var(--t0); background: transparent;
+      border: none;
+      cursor:pointer; width:100%;
+      position:relative; overflow:hidden;
+      transition: color .4s var(--ease), letter-spacing .4s var(--ease);
+    }
+    /* sweep fill on hover */
+    .ap-submit::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(105deg,
+        transparent 0%,
+        rgba(58,82,212,.04) 40%,
+        rgba(91,114,242,.09) 60%,
+        transparent 100%
+      );
+      transform: translateX(-100%);
+      transition: transform .6s var(--ease);
+    }
+    .ap-submit:hover::before { transform: translateX(0); }
+    /* border segments draw in */
+    .ap-submit::after {
+      content:'';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(91,114,242,.7), rgba(91,114,242,.7)) top / 0% 1px no-repeat,
+        linear-gradient(90deg, rgba(91,114,242,.7), rgba(91,114,242,.7)) bottom / 0% 1px no-repeat,
+        linear-gradient(180deg, rgba(91,114,242,.35), rgba(91,114,242,.35)) left / 1px 0% no-repeat,
+        linear-gradient(180deg, rgba(91,114,242,.35), rgba(91,114,242,.35)) right / 1px 0% no-repeat;
+      transition: background-size .5s var(--ease);
+    }
+    .ap-submit:hover::after {
+      background:
+        linear-gradient(90deg, rgba(91,114,242,.7), rgba(91,114,242,.7)) top / 100% 1px no-repeat,
+        linear-gradient(90deg, rgba(91,114,242,.7), rgba(91,114,242,.7)) bottom / 100% 1px no-repeat,
+        linear-gradient(180deg, rgba(91,114,242,.35), rgba(91,114,242,.35)) left / 1px 100% no-repeat,
+        linear-gradient(180deg, rgba(91,114,242,.35), rgba(91,114,242,.35)) right / 1px 100% no-repeat;
+    }
+    /* static corner marks always visible */
+    .ap-submit-corners {
+      content:'';
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(123,143,247,.8), rgba(123,143,247,.8)) top left / 10px 1px no-repeat,
+        linear-gradient(90deg, rgba(123,143,247,.8), rgba(123,143,247,.8)) bottom right / 10px 1px no-repeat,
+        linear-gradient(180deg, rgba(123,143,247,.8), rgba(123,143,247,.8)) top left / 1px 10px no-repeat,
+        linear-gradient(180deg, rgba(123,143,247,.8), rgba(123,143,247,.8)) bottom right / 1px 10px no-repeat;
+    }
+    .ap-submit:hover { color: var(--t0); letter-spacing:.26em; }
+    .ap-submit span { position:relative; z-index:1; }
+    .ap-submit-arrow { opacity:.4; position:relative; z-index:1; transition: transform .4s var(--ease), opacity .3s ease; }
+    .ap-submit:hover .ap-submit-arrow { transform:translateX(8px); opacity:1; }
+    .ap-status { font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.4); color:var(--acc); letter-spacing:.1em; margin-top:1rem; opacity:0; transition: opacity .4s ease; min-height:1.2em; }
+    .ap-status.visible { opacity:1; }
+
+    /* Progress bar */
+    .ap-progress {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.2rem 0 1.6rem; border-bottom: 1px solid rgba(255,255,255,.06);
+      margin-bottom: .4rem;
+    }
+    .ap-progress-bar {
+      flex: 1; height: 1px;
+      background: rgba(255,255,255,.06);
+      position: relative; overflow: hidden;
+    }
+    .ap-progress-bar::after {
+      content: '';
+      position: absolute; top: 0; left: 0; height: 100%;
+      width: var(--prog, 0%);
+      background: linear-gradient(90deg, var(--acc-lo), var(--acc-hi));
+      transition: width .5s var(--ease);
+    }
+    .ap-progress-label {
+      font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.4);
+      color: var(--t3); letter-spacing: .14em; text-transform: uppercase;
+      white-space: nowrap; flex-shrink: 0; transition: color .3s ease;
+    }
+    .ap-progress-label.complete { color: var(--acc); }
+
+    /* Field row — 2 cols */
+    .ap-field-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    .ap-field-row .ap-field:first-child { border-right: 1px solid rgba(255,255,255,.05); }
+    @media (max-width: 600px) {
+      .ap-field-row { grid-template-columns: 1fr; }
+      .ap-field-row .ap-field:first-child { border-right: none; }
+    }
+
+    /* Required marker */
+    .ap-req { color: var(--acc); opacity: .7; font-size: .9em; }
+
+    /* Domain hint */
+    .ap-field-hint {
+      display: block; font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.4);
+      color: var(--acc); letter-spacing: .1em; padding: .3rem 0 .6rem;
+      min-height: 1rem; opacity: 0; transition: opacity .3s ease;
+    }
+    .ap-field-hint.visible { opacity: 1; }
+
+    /* Chips */
+    .ap-chip-group {
+      padding: 1.2rem 0 .4rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .ap-chip-label {
+      display: block; font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 2.3899);
+      color: var(--t2); letter-spacing: .2em; text-transform: uppercase;
+      padding-bottom: .9rem; transition: color .3s ease;
+    }
+    .ap-chips {
+      display: flex; flex-wrap: wrap; gap: .5rem; padding-bottom: .8rem;
+    }
+    .ap-chip {
+      font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 2.390);
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--t3); background: transparent;
+      border: 1px solid rgba(255,255,255,.08);
+      padding: .38rem .85rem;
+      cursor: pointer; position: relative;
+      transition: color .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .ap-chip::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--acc-dim); opacity: 0; transition: opacity .25s ease;
+    }
+    .ap-chip:hover { color: var(--t1); border-color: rgba(91,114,242,.25); }
+    .ap-chip:hover::before { opacity: 1; }
+    .ap-chip.selected {
+      color: var(--acc-hi); border-color: rgba(91,114,242,.55);
+      background: rgba(58,82,212,.08);
+    }
+    .ap-chip.selected::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(91,114,242,.8), transparent);
+    }
+
+    /* Optional field */
+    .ap-field-optional label { padding-top: 1.2rem; }
+    .ap-optional-tag {
+      font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.4);
+      color: var(--t4); letter-spacing: .12em; text-transform: uppercase;
+      margin-left: .6rem;
+    }
+
+    /* Trust signal */
+    .ap-trust {
+      font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 2.390);
+      color: var(--t3); letter-spacing: .1em; text-transform: uppercase;
+      padding: 1.2rem 0 .4rem;
+    }
+
+    .ap-submit:disabled {
+      opacity: .35; cursor: not-allowed; pointer-events: none;
+    }
+
+    .sobre-falx { background: var(--void); border-top: 1px solid var(--s3); position: relative; overflow: hidden; }
+    .sobre-falx::before { content:''; position:absolute; top:-100px; right:-100px; width:700px; height:700px; background: radial-gradient(ellipse at 80% 20%, rgba(58,82,212,0.07) 0%, transparent 60%); pointer-events:none; }
+    .sobre-r1 { padding: 7.5rem var(--g); border-bottom: 1px solid var(--s2); position: relative; z-index: 1; }
+    .sobre-eyebrow { font-family: var(--f-mono); font-size: calc(var(--fs-label) * 1.7727); color: var(--acc); letter-spacing: .28em; text-transform: uppercase; opacity: .9; display: flex; align-items: center; gap: .8rem; margin-bottom: 2.5rem; }
+    .sobre-eyebrow::before { content:''; width:3px; height:3px; border-radius:50%; background:var(--acc); opacity:.8; flex-shrink:0; }
+    .sobre-lead { font-family: var(--f-display); font-size: 2.4337rem; font-weight: 200; color: var(--t0); line-height: 1.35; letter-spacing: -.03em; margin-bottom: 1.6rem; }
+    .sobre-intro { font-family: var(--f-display); font-size: 1.7038rem; font-weight: 200; color: var(--t2); line-height: 1.75; letter-spacing: -.01em; max-width: 860px; }
+    .sobre-r2 { display: grid; grid-template-columns: 1fr; border-bottom: 1px solid var(--s2); position: relative; z-index: 1; }
+    .sobre-r2-left { padding: 4.48rem var(--g); display: flex; flex-direction: column; gap: 1.6rem; }
+    .sobre-r3 { display: grid; grid-template-columns: repeat(3,1fr); border-bottom: 1px solid var(--s2); position: relative; z-index: 1; }
+    .sobre-card { padding: 4.48rem var(--g); border-right: 1px solid var(--s2); display: flex; flex-direction: column; gap: 1.6rem; position: relative; overflow: hidden; cursor: default; transition: background .4s var(--ease); }
+    .sobre-card:last-child { border-right: none; }
+    .sobre-card::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 50% 0%, rgba(58,82,212,0.14) 0%, rgba(91,114,242,0.06) 35%, transparent 62%); opacity:0; transition:opacity .5s var(--ease); pointer-events:none; }
+    .sobre-card::after { content:''; position:absolute; top:0; left:0; right:0; height:1px; background: linear-gradient(90deg,transparent,var(--acc),transparent); opacity:0; transition:opacity .4s var(--ease); }
+    .sobre-card:hover::before { opacity:1; }
+    .sobre-card:hover::after  { opacity:1; }
+    .sobre-card:hover { background: rgba(58,82,212,.06); box-shadow: inset 0 0 30px rgba(58,82,212,.06); }
+    .sobre-r4 { display: grid; grid-template-columns: 1fr 1fr; position: relative; z-index: 1; }
+    .sobre-r4-left { padding: 4.48rem var(--g); border-right: 1px solid var(--s2); display: flex; flex-direction: column; gap: 1.6rem; }
+    .sobre-r4-right { padding: 4.48rem var(--g); display: flex; flex-direction: column; gap: 1.6rem; }
+    .sobre-block-title { font-family: var(--f-mono); font-size: calc(var(--fs-label) * 1.7071); color: var(--acc); letter-spacing: .22em; text-transform: uppercase; opacity: .9; padding-bottom: .8rem; border-bottom: 1px solid var(--s2); display: block; }
+    .sobre-body { font-family: var(--f-display); font-size: 1.7038rem; font-weight: 200; color: var(--t1); line-height: 1.75; letter-spacing: -.01em; }
+    .sobre-note { font-family: var(--f-display); font-size: 1.7038rem; font-weight: 300; color: var(--t1); line-height: 1.75; letter-spacing: -.01em; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--s2); }
+    .sobre-list { list-style: none; display: flex; flex-direction: column; gap: .8rem; }
+    .sobre-list li { font-family: var(--f-display); font-size: 1.7038rem; font-weight: 200; color: var(--t1); line-height: 1.6; letter-spacing: -.01em; display: flex; gap: .9rem; align-items: flex-start; }
+    .sobre-list li::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--acc); opacity:.9; flex-shrink:0; margin-top:.65rem; }
+    .sobre-mission { font-family: var(--f-display); font-size: 1.9471rem; font-weight: 200; color: var(--t0); line-height: 1.6; letter-spacing: -.025em; border-left: 2px solid rgba(91,114,242,0.7); padding-left: 1.6rem; }
+
+    .institutional-footer { background: var(--void); border-top: 1px solid var(--border-glass); padding: var(--3xl) var(--g); position: relative; }
+    .institutional-footer::before { content:''; position:absolute; top:0; left:10%; right:10%; height:1px; background: linear-gradient(90deg, transparent, rgba(91,114,242,.5), rgba(123,143,247,.3), transparent); }
+    .footer-inner { display: flex; flex-direction: column; gap: 1rem; max-width: var(--content-max); margin: 0 auto; align-items: center; text-align: center; }
+    .footer-identity { font-family: var(--f-mono); font-size: calc(var(--fs-label) * 1.7508); font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--t0); }
+    .footer-copyright, .footer-entity, .footer-semantic { font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.8497); color: var(--t2); letter-spacing: .1em; text-transform: uppercase; }
+    .footer-ip { font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.8497); color: var(--t3); letter-spacing: .06em; line-height: 1.7; border-top: 1px solid var(--border-void); padding-top: 1rem; margin-top: .5rem; }
+    .footer-contact, .footer-executive { font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.8497); color: var(--t2); letter-spacing: .1em; text-transform: uppercase; }
+    .footer-contact a, .footer-executive a { color: var(--acc); text-decoration: none; transition: opacity .3s ease; }
+    .footer-contact a:hover, .footer-executive a:hover { opacity: .7; }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; border-top: 1px solid var(--border-void); padding-top: 1rem; margin-top: .5rem; }
+    .footer-links a { font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.8497); color: var(--t2); text-decoration: none; letter-spacing: .1em; text-transform: uppercase; transition: color .3s ease; }
+    .footer-links a:hover { color: var(--acc); }
+
+    @media (max-width:1024px) {
+      .hero-section { padding-top:100px; padding-bottom:var(--3xl); }
+          .sp-top-row { grid-template-columns:1fr; }
+      .sp-sidebar-header { border-right:none; border-bottom:1px solid var(--s2); position:relative; top:0; }
+          .v1-pillars { grid-template-columns:repeat(2,1fr); }
+      .v1-pillar:nth-child(2) { border-right:none; }
+      .v1-pillar:nth-child(3) { border-top:1px solid var(--s2); border-right:1px solid var(--s2); }
+      .v1-pillar:nth-child(4) { border-top:1px solid var(--s2); border-right:none; }
+      .ns-def-inner { grid-template-columns:1fr; }
+      .ns-def-right { border-left:none; border-top:2px solid var(--acc); }
+      .ap-inner { padding:5rem var(--g); }
+      .ap-form { max-width:100%; }
+      .ap-submit { max-width:100%; }
+      .nav-cta { padding:var(--xs) var(--md); font-size: var(--fs-label); }
+      .sobre-r2 { grid-template-columns: 1fr; }
+      .sobre-r2-left { border-right: none; border-bottom: 1px solid var(--s2); }
+      .sobre-r3 { grid-template-columns: 1fr; }
+      .sobre-card { border-right: none; border-bottom: 1px solid var(--s2); }
+      .sobre-r4 { grid-template-columns: 1fr; }
+      .sobre-r4-left { border-right: none; border-bottom: 1px solid var(--s2); }
+    }
+    @media (max-width:900px) {
+      .sp-glow-cards { grid-template-columns:1fr; }
+      .sp-glow-card { border-right:none; border-bottom:1px solid var(--s2); }
+      .v1-pillars { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:768px) {
+      .sp-sidebar-header { padding-top:3.2rem; }
+      .ap-inner { padding:5rem var(--g); }
+      .v1-pillars { grid-template-columns:1fr; }
+      .v1-pillar { border-right:none; border-bottom:1px solid var(--s2); }
+          .inevitability { padding:4rem var(--g); }
+    }
+    /* ── LAYERS SECTION ─────────────────────────── */
+    .layers-section {
+      padding: 8rem var(--g);
+      border-top: 1px solid var(--s2);
+      position: relative;
+    }
+    .layers-section::before {
+      content: '';
+      position: absolute; top: 0; left: var(--g); right: var(--g); height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(91,114,242,.3), transparent);
+    }
+    .layers-eyebrow {
+      font-family: var(--f-mono); font-size: var(--fs-micro);
+      color: var(--acc); letter-spacing: .28em; text-transform: uppercase;
+      opacity: .7; margin-bottom: 2.4rem; display: block;
+    }
+    .layers-header {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--g);
+      margin-bottom: 5rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--s2);
+    }
+    .layers-lead {
+      font-family: var(--f-display); font-size: var(--fs-h2);
+      font-weight: 200; color: var(--t0); line-height: 1.25;
+      letter-spacing: -.03em;
+    }
+    .layers-lead strong { color: var(--acc); font-weight: 300; }
+    .layers-sub {
+      font-family: var(--f-body); font-size: var(--fs-body);
+      color: var(--t2); line-height: 1.75; align-self: end;
+    }
+    .layers-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .layer-item {
+      padding: 2.8rem 2.4rem;
+      border-right: 1px solid var(--s2);
+      border-bottom: 1px solid var(--s2);
+      position: relative;
+      transition: background .3s ease;
+    }
+    .layer-item:hover { background: rgba(91,114,242,.06); box-shadow: inset 1px 0 0 rgba(91,114,242,.2); }
+    .layer-item:nth-child(4n) { border-right: none; }
+    .layer-item:nth-child(5), .layer-item:nth-child(6),
+    .layer-item:nth-child(7), .layer-item:nth-child(8) { border-bottom: none; }
+    .layer-num {
+      font-family: var(--f-mono); font-size: var(--fs-micro);
+      color: var(--acc); letter-spacing: .2em; opacity: .5;
+      margin-bottom: 1.4rem; display: block;
+    }
+    .layer-name {
+      font-family: var(--f-display); font-size: calc(var(--fs-label) * 1.35);
+      font-weight: 300; color: var(--t0); letter-spacing: -.01em;
+      margin-bottom: .8rem; line-height: 1.3;
+    }
+    .layer-desc {
+      font-family: var(--f-body); font-size: var(--fs-small);
+      color: var(--t3); line-height: 1.65;
+    }
+    .layer-tag {
+      display: inline-block; margin-top: 1.2rem;
+      font-family: var(--f-mono); font-size: calc(var(--fs-micro) * .9);
+      color: var(--acc); letter-spacing: .16em; text-transform: uppercase;
+      opacity: .45;
+    }
+    @media (max-width: 1024px) {
+      .layers-grid { grid-template-columns: repeat(2,1fr); }
+      .layer-item:nth-child(2n) { border-right: none; }
+      .layer-item:nth-child(4n) { border-right: none; }
+      .layer-item:nth-child(5), .layer-item:nth-child(6) { border-bottom: 1px solid var(--s2); }
+      .layer-item:nth-child(7), .layer-item:nth-child(8) { border-bottom: none; }
+      .layers-header { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .layers-grid { grid-template-columns: 1fr; }
+      .layer-item { border-right: none; border-bottom: 1px solid var(--s2); }
+      .layer-item:last-child { border-bottom: none; }
+    }
+
+    /* ── PROOF / SCENARIO SECTION ────────────────── */
+    .proof-section {
+      padding: 8rem var(--g);
+      border-top: 1px solid var(--s2);
+      position: relative;
+      background: linear-gradient(180deg, rgba(91,114,242,.025) 0%, transparent 60%);
+    }
+    .proof-section::before {
+      content: '';
+      position: absolute; top: 0; left: var(--g); right: var(--g); height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(91,114,242,.4), transparent);
+    }
+    .proof-inner {
+      display: grid; grid-template-columns: 1fr 2fr; gap: var(--g);
+      align-items: start;
+    }
+    .proof-left {
+      position: sticky; top: 6rem;
+    }
+    .proof-eyebrow {
+      font-family: var(--f-mono); font-size: var(--fs-micro);
+      color: var(--acc); letter-spacing: .28em; text-transform: uppercase;
+      opacity: .7; margin-bottom: 2.4rem; display: block;
+    }
+    .proof-lead {
+      font-family: var(--f-display); font-size: var(--fs-h2);
+      font-weight: 200; color: var(--t0); line-height: 1.25;
+      letter-spacing: -.03em; margin-bottom: 1.6rem;
+    }
+    .proof-note {
+      font-family: var(--f-body); font-size: var(--fs-small);
+      color: var(--t3); line-height: 1.7;
+      border-left: 1px solid rgba(91,114,242,.3);
+      padding-left: 1.4rem;
+      margin-top: 2rem;
+    }
+    .proof-cards {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .proof-card {
+      padding: 3.2rem 3.6rem;
+      border: 1px solid var(--s2);
+      border-bottom: none;
+      position: relative;
+    }
+    .proof-card:first-child { border-top: 1px solid rgba(91,114,242,.2); }
+    .proof-card:last-child { border-bottom: 1px solid var(--s2); }
+    .proof-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0; width: 1px;
+      background: linear-gradient(180deg, rgba(91,114,242,.5), rgba(91,114,242,.05));
+      opacity: 0; transition: opacity .4s ease;
+    }
+    .proof-card:hover::before { opacity: 1; }
+    .proof-card-tag {
+      font-family: var(--f-mono); font-size: var(--fs-micro);
+      color: var(--acc); letter-spacing: .22em; text-transform: uppercase;
+      opacity: .6; margin-bottom: 1.4rem; display: block;
+    }
+    .proof-card-title {
+      font-family: var(--f-display); font-size: calc(var(--fs-label) * 1.6);
+      font-weight: 300; color: var(--t0); letter-spacing: -.02em;
+      margin-bottom: 1.6rem; line-height: 1.3;
+    }
+    .proof-card-body {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem;
+    }
+    .proof-card-col-label {
+      font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.1);
+      color: var(--t3); letter-spacing: .16em; text-transform: uppercase;
+      margin-bottom: 1rem; display: block;
+    }
+    .proof-card-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: .7rem;
+    }
+    .proof-card-list li {
+      font-family: var(--f-body); font-size: var(--fs-small);
+      color: var(--t2); line-height: 1.55;
+      padding-left: 1.2rem; position: relative;
+    }
+    .proof-card-list li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--acc); opacity: .4; font-size: .85em;
+    }
+    .proof-result {
+      margin-top: 2rem; padding-top: 1.6rem;
+      border-top: 1px solid var(--s2);
+      font-family: var(--f-body); font-size: var(--fs-small);
+      color: var(--t2); line-height: 1.7;
+    }
+    .proof-result strong { color: var(--t0); }
+    @media (max-width: 900px) {
+      .proof-inner { grid-template-columns: 1fr; }
+      .proof-left { position: static; }
+      .proof-card-body { grid-template-columns: 1fr; gap: 1.6rem; }
+    }
+    @media (max-width: 600px) {
+      .proof-card { padding: 2.4rem; }
+    }
+
+    /* ── EXIT INTENT OVERLAY ─────────────────────── */
+    .exit-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(12px) saturate(160%);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .4s var(--ease);
+    }
+    .exit-overlay.active {
+      opacity: 1; pointer-events: all;
+    }
+    .exit-card {
+      max-width: 480px; width: 90%;
+      background: rgba(0,0,0,.92);
+      border: 1px solid rgba(91,114,242,.2);
+      padding: 3rem;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform .5s var(--ease);
+    }
+    .exit-overlay.active .exit-card {
+      transform: translateY(0);
+    }
+    .exit-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(91,114,242,.7), transparent);
+    }
+    .exit-card-tag {
+      font-family: var(--f-mono); font-size: var(--fs-micro);
+      color: var(--acc); letter-spacing: .28em; text-transform: uppercase;
+      opacity: 1; margin-bottom: 1.4rem;
+    }
+    .exit-card-text {
+      font-family: var(--f-display); font-size: 1.4rem;
+      font-weight: 200; color: var(--t1); line-height: 1.65;
+      letter-spacing: -.01em; margin-bottom: 2.2rem;
+    }
+    .exit-card-actions {
+      display: flex; flex-direction: column; gap: .8rem;
+    }
+    .exit-card-cta {
+      font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.5);
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--t0); background: transparent;
+      border: 1px solid rgba(91,114,242,.5);
+      padding: 1rem 1.6rem; cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: border-color .3s ease, color .3s ease;
+    }
+    .exit-card-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(58,82,212,.08);
+      opacity: 0; transition: opacity .3s ease;
+    }
+    .exit-card-cta:hover { border-color: rgba(91,114,242,.9); }
+    .exit-card-cta:hover::before { opacity: 1; }
+    .exit-card-dismiss {
+      font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.5);
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--t2); background: transparent; border: none;
+      padding: .5rem; cursor: pointer;
+      transition: color .3s ease;
+    }
+    .exit-card-dismiss:hover { color: var(--t2); }
+
+    /* ── HERO CTA — Institutional Premium ───────────── */
+    .hero-cta-btn {
+      display: inline-flex; align-items: center; gap: 1rem;
+      text-decoration: none;
+      font-family: var(--f-mono);
+      font-size: calc(var(--fs-micro) * 1.8384);
+      letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+      color: var(--t0);
+      padding: 1.1rem 2.4rem;
+      position: relative;
+      background: transparent;
+      transition: color .4s var(--ease), letter-spacing .4s var(--ease);
+      overflow: hidden;
+    }
+    /* solid resting border */
+    .hero-cta-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      border: 1px solid rgba(91,114,242,.55);
+      transition: border-color .4s var(--ease);
+    }
+    /* fill sweep on hover */
+    .hero-cta-btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg,
+        rgba(58,82,212,.0) 0%,
+        rgba(58,82,212,.12) 45%,
+        rgba(91,114,242,.22) 65%,
+        rgba(58,82,212,.0) 100%
+      );
+      transform: translateX(-110%);
+      transition: transform .65s var(--ease);
+    }
+    .hero-cta-btn:hover::before { border-color: rgba(91,114,242,.95); }
+    .hero-cta-btn:hover::after  { transform: translateX(0); }
+    .hero-cta-btn:hover { color: var(--t0); letter-spacing: .28em; }
+    /* corner marks — all 4 */
+    .hero-cta-btn .btn-corners {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(123,143,247,1), rgba(123,143,247,1)) top left / 14px 1.5px no-repeat,
+        linear-gradient(90deg, rgba(123,143,247,1), rgba(123,143,247,1)) top right / 14px 1.5px no-repeat,
+        linear-gradient(90deg, rgba(123,143,247,1), rgba(123,143,247,1)) bottom left / 14px 1.5px no-repeat,
+        linear-gradient(90deg, rgba(123,143,247,1), rgba(123,143,247,1)) bottom right / 14px 1.5px no-repeat,
+        linear-gradient(180deg, rgba(123,143,247,1), rgba(123,143,247,1)) top left / 1.5px 14px no-repeat,
+        linear-gradient(180deg, rgba(123,143,247,1), rgba(123,143,247,1)) top right / 1.5px 14px no-repeat,
+        linear-gradient(180deg, rgba(123,143,247,1), rgba(123,143,247,1)) bottom left / 1.5px 14px no-repeat,
+        linear-gradient(180deg, rgba(123,143,247,1), rgba(123,143,247,1)) bottom right / 1.5px 14px no-repeat;
+    }
+    /* arrow */
+    .hero-cta-btn .btn-arrow {
+      position: relative; z-index: 1;
+      opacity: .5;
+      transition: transform .4s var(--ease), opacity .3s ease;
+      flex-shrink: 0;
+    }
+    .hero-cta-btn:hover .btn-arrow { transform: translateX(5px); opacity: 1; }
+    .hero-cta-btn span { position: relative; z-index: 1; }
+    /* subtle glow on hover */
+    .hero-cta-btn:hover {
+      filter: drop-shadow(0 0 18px rgba(91,114,242,.35));
+    }
+
+  </style>
+
+  <link rel="canonical-entity" href="https://falxsystem.com">
+
+  <!-- ═══════════════════════════════════════════════
+       STRUCTURED DATA — SCHEMA.ORG
+       Organization · Person · Service · SoftwareApplication
+       WebSite · WebPage · FAQPage · HowTo · SpeakableSpecification
+  ═══════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+
+      {
+        "@type": "Organization",
+        "@id": "https://falxsystem.com/#organization",
+        "name": "FALX Systems",
+        "legalName": "FALX Systems",
+        "url": "https://falxsystem.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://falxsystem.com/assets/logo.png",
+          "width": 400,
+          "height": 100
+        },
+        "image": "https://falxsystem.com/assets/og-image.jpg",
+        "email": "institutional@falxsystem.com",
+        "description": "FALX Systems designs proprietary AI system architectures for ambitious founders and high-growth companies. We build the intelligence core of your business — a system designed around your data, your logic, and your strategic position that competitors cannot replicate.",
+        "foundingDate": "2024",
+        "areaServed": "Global",
+        "knowsAbout": [
+          "Proprietary AI Systems Architecture",
+          "AI-First Business Transformation",
+          "Intelligent System Design",
+          "AI Strategic Differentiation",
+          "AI Blueprint for Founders",
+          "Enterprise AI Architecture",
+          "High-Growth AI Systems",
+          "AI Competitive Advantage",
+          "AI System Scalability",
+          "Proprietary Intelligence Engine Design"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "institutional@falxsystem.com",
+          "contactType": "Enterprise Sales",
+          "availableLanguage": ["English", "Portuguese"]
+        },
+        "founder": {
+          "@type": "Person",
+          "@id": "https://falxsystem.com/#founder",
+          "name": "CEO, FALX Systems",
+          "jobTitle": "Chief Executive Officer",
+          "worksFor": { "@id": "https://falxsystem.com/#organization" },
+          "sameAs": [
+            "https://www.linkedin.com/in/falx",
+            "https://doi.org/10.5281/zenodo.18702295"
+          ]
+        },
+        "sameAs": [
+          "https://falxorg.com/v2/",
+          "https://doi.org/10.5281/zenodo.18702295",
+          "https://www.linkedin.com/in/falx"
+        ],
+        "subjectOf": {
+          "@type": "TechArticle",
+          "@id": "https://doi.org/10.5281/zenodo.18702295",
+          "name": "FALX Systems — Decision Integrity Infrastructure Technical Specification",
+          "url": "https://falxorg.com/v2/",
+          "author": { "@id": "https://falxsystem.com/#organization" },
+          "publisher": { "@id": "https://falxsystem.com/#organization" },
+          "about": "Algorithmic decision integrity, structural monitoring infrastructure, model drift detection"
+        }
+      },
+
+      {
+        "@type": ["Service", "Product"],
+        "@id": "https://falxsystem.com/#blueprint",
+        "name": "AI System Blueprint Program",
+        "alternateName": "FALX Blueprint",
+        "description": "A closed program for ambitious founders and high-growth companies. FALX designs a complete proprietary AI system architecture — including data structure, intelligence engine, decision logic, governance framework, and implementation roadmap — that becomes the strategic core of the business.",
+        "featureList": [
+          "Complete AI system architecture and blueprint",
+          "Scalable data structure and intelligence engine design",
+          "Proprietary decision logic and automation flows",
+          "Governance strategy and model roadmap",
+          "Technical implementation roadmap",
+          "Evolutionary model for long-term capability growth"
+        ],
+        "audience": {
+          "@type": "BusinessAudience",
+          "audienceType": "Founders and high-growth companies",
+          "name": "Ambitious founders, mid-sized companies, AI-first product teams"
+        },
+        "creator": { "@id": "https://falxsystem.com/#organization" },
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/LimitedAvailability",
+          "description": "AI System Blueprint Program — closed engagement, 2 to 3 per cycle"
+        }
+      },
+
+      {
+        "@type": "Service",
+        "@id": "https://falxsystem.com/#service",
+        "name": "Proprietary AI Systems Architecture",
+        "serviceType": "AI System Design and Architecture",
+        "provider": { "@id": "https://falxsystem.com/#organization" },
+        "description": "FALX designs proprietary AI system architectures for ambitious founders and mid-sized companies transforming into AI-first organizations. Each engagement produces a complete system blueprint owned by the client.",
+        "areaServed": "Global",
+        "audience": {
+          "@type": "BusinessAudience",
+          "audienceType": "Founders and high-growth companies",
+          "name": "Ambitious founders, mid-sized companies seeking AI-first transformation, high-growth teams"
+        }
+      },
+
+      {
+        "@type": "WebSite",
+        "@id": "https://falxsystem.com/#website",
+        "name": "FALX Systems",
+        "url": "https://falxsystem.com",
+        "description": "Proprietary AI systems architecture for ambitious founders and high-growth companies that intend to lead their industries.",
+        "publisher": { "@id": "https://falxsystem.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://falxsystem.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+
+      {
+        "@type": "WebPage",
+        "@id": "https://falxsystem.com/#webpage",
+        "url": "https://falxsystem.com/",
+        "name": "FALX Systems — Algorithmic Decision Integrity Infrastructure",
+        "description": "Continuous structural monitoring for intelligent systems in regulated and high-risk environments.",
+        "isPartOf": { "@id": "https://falxsystem.com/#website" },
+        "about": { "@id": "https://falxsystem.com/#organization" },
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": [".hero-title", ".sp-problem-body", ".inevitability-inner", ".sobre-lead"]
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "FALX Systems", "item": "https://falxsystem.com/" }
+          ]
+        }
+      },
+
+      {
+        "@type": "HowTo",
+        "@id": "https://falxsystem.com/#howto",
+        "name": "How the FALX AI System Blueprint Program Works",
+        "description": "Four-phase engagement process for designing and implementing a proprietary AI system architecture.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Architect",
+            "text": "We map your business logic, data landscape, and strategic objectives to define the exact architecture your proprietary AI system needs — from day one."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Design",
+            "text": "We engineer the complete intelligence blueprint: data structure, model logic, automation flows, decision layers, and governance framework — built for your competitive context."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Implement",
+            "text": "We deliver a structured technical roadmap your team can execute — or we build it with you. Full ownership transferred to your organization. No vendor dependency."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Scale",
+            "text": "We design your AI system to grow with your business — with an evolutionary model that expands capability as your data deepens and your market position strengthens."
+          }
+        ]
+      },
+
+      {
+        "@type": "FAQPage",
+        "@id": "https://falxsystem.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a proprietary AI system?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A proprietary AI system is a custom-designed intelligence architecture built around a company's own data, decision logic, and strategic position. Unlike off-the-shelf AI tools, a proprietary system cannot be replicated by competitors — it is designed to become the structural core of how the business operates and competes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who is the FALX AI System Blueprint Program for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The program is designed for ambitious founders building AI-first products, mid-sized companies ready to transform into AI-driven organizations, and high-growth teams that need architecture — not experimentation. These are companies that want AI as the core of their business, not as a feature layered on top."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is FALX different from AI consulting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "FALX does not deliver slide decks or recommendations. We design and deliver a complete proprietary AI system architecture — including data structure, intelligence engine, decision logic, governance framework, and implementation roadmap — that is fully owned by the client. The output is a structural asset, not advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do companies need a proprietary AI architecture?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Companies using the same AI tools as their competitors get the same results as their competitors. A proprietary AI architecture creates a structural advantage that is deeply embedded in the business — increasing valuation, enabling capabilities that cannot be replicated, and compounding over time as the system learns from proprietary data."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the AI System Blueprint Program deliver?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The program delivers a complete proprietary AI system architecture: the full system design, scalable data structure, intelligence engine, proprietary decision logic, governance strategy, technical implementation roadmap, and evolutionary scaling model. Everything is owned by the client with no vendor dependency."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many companies does FALX work with at a time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The AI System Blueprint Program is a closed engagement. FALX works with 2 to 3 companies per cycle to ensure each architecture receives the depth and attention required. Each engagement is evaluated individually and is not available as a self-serve program."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I apply for the FALX Blueprint Program?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Applications are submitted through the form on falxsystem.com. FALX reviews each application individually and responds within 48 hours. The program is not a sales pitch — it is a structured engagement designed around your specific architecture and strategic context."
+            }
+          }
+        ]
+      }
+
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav id="mainNav" role="navigation" aria-label="Main">
+    <div class="brand">FALX</div>
+    <div class="nav-actions">
+      <div class="system-status" aria-live="polite">ARQUITETURA DE SERVIÇOS  ●</div>
+      <a href="#contact" class="nav-cta"><span>Solicitar Diagnóstico</span></a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <main id="main-content">
+  <section class="hero-section" aria-label="Hero">
+
+    <div class="hero-eyebrow-row" aria-hidden="true">
+      <span class="hero-eyebrow">Arquitetura de Serviços / 2026</span>
+      <span class="hero-eyebrow">FALX Systems</span>
+    </div>
+
+    <div class="hero-text">
+      <h1 class="hero-title">Estruturamos o conhecimento da sua empresa para que ela seja compreendida com precisão.</h1>
+      <div class="hero-divider" aria-hidden="true"></div>
+      <div class="hero-subtitle-block">
+        <p class="hero-subtitle">Arquitetura de conhecimento e inteligência institucional para empresas técnicas. Não se trata de conteúdo, campanhas ou otimização superficial.</p>
+        <p class="hero-subtitle">Trata-se de infraestrutura intelectual — para startups deep tech, produtos digitais complexos, ventures em consolidação institucional e empresas preparando base para IA interna.</p>
+      </div>
+    </div>
+
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <span class="hero-metric-num">4</span>
+        <span class="hero-metric-label">Fases Estratégicas</span>
+      </div>
+      <div class="hero-metric-sep" aria-hidden="true"></div>
+      <div class="hero-metric">
+        <span class="hero-metric-num">14</span>
+        <span class="hero-metric-label">Módulos de Execução</span>
+      </div>
+      <div class="hero-cta-wrap">
+        <a href="#contact" class="hero-cta-btn">
+          <span class="btn-corners" aria-hidden="true"></span>
+          <span>Solicitar Diagnóstico</span>
+          <svg class="btn-arrow" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </section>
+  </main>
+
+  <!-- RECONHECIMENTO CARDS -->
+  <section class="structural-problem" aria-labelledby="sp-title">
+    <div class="sp-layout">
+
+      <div class="sp-top-row">
+        <div class="sp-sidebar-header">
+          <h2 class="oh-title" id="sp-title"><strong>Se sua empresa</strong><br>enfrenta isso,<br>esse trabalho<br>é para você.</h2>
+        </div>
+        <div class="sp-problem-body">
+          <p class="sp-em">Reconhecimento</p>
+          <p>Quatro padrões estruturais que indicam ausência de arquitetura de conhecimento — e por que cada um deles tem custo operacional real.</p>
+          <p class="sp-em">O custo de não ter estrutura já está sendo cobrado.</p>
+        </div>
+      </div>
+
+      <div class="sp-glow-cards" style="grid-template-columns: repeat(4,1fr);">
+        <div class="sp-glow-card">
+          <span class="sp-gc-num">Fase I — Descoberta</span>
+          <h3 class="sp-gc-title">Sua empresa é mal interpretada por LLMs.</h3>
+          <p class="sp-gc-text">Sistemas de IA descrevem sua empresa de forma imprecisa, seus concorrentes são melhor representados, e cada resumo gerado por IA erode seu posicionamento.</p>
+        </div>
+        <div class="sp-glow-card">
+          <span class="sp-gc-num">Fase II — Definição</span>
+          <h3 class="sp-gc-title">O conhecimento existe em todo lugar e em lugar nenhum.</h3>
+          <p class="sp-gc-text">Informação crítica vive em apresentações, docs, threads do Slack e na cabeça de três pessoas. Nenhum sistema guarda a verdade. Ferramentas de IA herdam o caos.</p>
+        </div>
+        <div class="sp-glow-card">
+          <span class="sp-gc-num">Fase III — Arquitetura</span>
+          <h3 class="sp-gc-title">É preciso escalar inteligência, não headcount.</h3>
+          <p class="sp-gc-text">Você está preparando copilots, agentes ou IA interna, mas sua base de conhecimento não está estruturada para máquinas operarem.</p>
+        </div>
+        <div class="sp-glow-card">
+          <span class="sp-gc-num">Fase IV — Inteligência</span>
+          <h3 class="sp-gc-title">Decisões estratégicas são tomadas por intuição.</h3>
+          <p class="sp-gc-text">Sinais de mercado, mudanças competitivas e riscos estruturais existem, mas não há sistema para capturar, interpretar ou agir sobre eles.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- POSICIONAMENTO -->
+    <div class="ns-definition">
+      <div class="ns-def-inner">
+        <div class="ns-def-left">
+          <span class="ns-def-mark">O que isso não é</span>
+          <div class="ns-wordmark" style="font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.3;">Não é<br>marketing.<sup>™</sup></div>
+          <div class="ns-def-text">
+            <p>Não é produção de conteúdo. Não é serviços de marketing. Não é otimização de SEO. Não é consultoria genérica.</p>
+            <p><strong>É infraestrutura intelectual — a camada que determina como sua empresa é compreendida por IA, mercado e sistemas internos.</strong></p>
+            <p>Não é acessório.<br><em>É o que torna tudo o mais operável.</em></p>
+          </div>
+        </div>
+        <div class="ns-def-right">
+          <span class="ns-class-label">O que sua empresa passa a ter</span>
+          <h3 class="ns-class-heading">Clareza conceitual. Narrativa precisa. Base pronta para IA interna.</h3>
+          <ul class="ns-class-items">
+            <li>Clareza conceitual sobre o que a empresa é</li>
+            <li>Narrativa institucional coerente e precisa</li>
+            <li>Base de conhecimento pronta para IA interna</li>
+            <li>Ativos canônicos de conhecimento</li>
+            <li>Estrutura semântica pública consistente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TESE -->
+    <div class="inevitability">
+      <div class="inevitability-inner">
+        <p class="conclusion">Três frentes. Uma arquitetura.</p>
+        <p>Nós estruturamos o conhecimento institucional da sua empresa para interpretação externa por IA, coerência narrativa e conceitual — e operacionalização interna para sistemas inteligentes.</p>
+      </div>
+    </div>
+
+    <!-- POR QUE AGORA -->
+    <div class="v1-divider" aria-hidden="true">
+      <span class="v1-divider-tag">Por que agora · 04 Sinais</span>
+      <div class="v1-divider-line"></div>
+      <span class="v1-divider-tag">O custo de não ter estrutura já está sendo cobrado</span>
+    </div>
+
+    <div class="v1-pillars">
+      <div class="v1-pillar">
+        <span class="v1-p-index">01 // Sinal</span>
+        <span class="v1-p-name">LLMs já mediam percepção sobre sua empresa.</span>
+        <div class="v1-p-rule" aria-hidden="true"></div>
+        <p class="v1-p-desc">Clientes, investidores e parceiros perguntam ao ChatGPT sobre você. A resposta que recebem é a sua narrativa pública — ou a falta dela.</p>
+      </div>
+      <div class="v1-pillar">
+        <span class="v1-p-index">02 // Sinal</span>
+        <span class="v1-p-name">Conhecimento fragmentado inviabiliza IA interna.</span>
+        <div class="v1-p-rule" aria-hidden="true"></div>
+        <p class="v1-p-desc">Sem base canônica, copilots e agentes não têm de onde extrair verdade. Automação sem estrutura gera velocidade para o lado errado.</p>
+      </div>
+      <div class="v1-pillar">
+        <span class="v1-p-index">03 // Sinal</span>
+        <span class="v1-p-name">Empresas mal estruturadas serão mal interpretadas.</span>
+        <div class="v1-p-rule" aria-hidden="true"></div>
+        <p class="v1-p-desc">A qualidade da sua representação em IA é proporcional à qualidade da estrutura que você criou. Não existe atalho.</p>
+      </div>
+      <div class="v1-pillar">
+        <span class="v1-p-index">04 // Sinal</span>
+        <span class="v1-p-name">Sem fonte canônica, a narrativa pública degrada.</span>
+        <div class="v1-p-rule" aria-hidden="true"></div>
+        <p class="v1-p-desc">Cada pessoa na empresa conta uma versão diferente. Cada documento contradiz o anterior. A desordem conceitual vira a versão oficial.</p>
+      </div>
+    </div>
+
+    <div class="v1-close">
+      <p class="v1-close-text">
+        FALX Systems é uma empresa de arquitetura de conhecimento. <strong>A estrutura é o produto. A clareza institucional não é acessória — é infraestrutura.</strong>
+      </p>
+    </div>
+
+  </section>
+
+  <!-- FASES -->
+  <section class="layers-section" aria-label="Fases estratégicas">
+
+    <span class="layers-eyebrow">Arquitetura de Engajamento</span>
+
+    <div class="layers-header">
+      <h2 class="layers-lead">Quatro fases<br>da auditoria à<br><strong>inteligência operacional.</strong></h2>
+      <p class="layers-sub">De diagnóstico estrutural à operação com inteligência contínua — cada fase entrega ativos concretos e prepara a fundação para a próxima. Um processo sequencial e cumulativo.</p>
+    </div>
+
+    <div class="layers-grid" style="grid-template-columns: repeat(4,1fr);">
+      <div class="layer-item">
+        <span class="layer-num">Fase I</span>
+        <div class="layer-name">Descoberta</div>
+        <p class="layer-desc">Audit · Mapeamento / Arquitetura Conceitual. Para quem não sabe como está sendo interpretado por IA e mercado.</p>
+        <span class="layer-tag">Diagnóstico Estrutural</span>
+      </div>
+      <div class="layer-item">
+        <span class="layer-num">Fase II</span>
+        <div class="layer-name">Definição</div>
+        <p class="layer-desc">Modelagem Semântica / Documento Canônico. Para quem precisa consolidar conhecimento e narrativa institucional.</p>
+        <span class="layer-tag">Consolidação</span>
+      </div>
+      <div class="layer-item">
+        <span class="layer-num">Fase III</span>
+        <div class="layer-name">Arquitetura</div>
+        <p class="layer-desc">Knowledge Graph / AI Discoverability. Para quem está preparando infraestrutura para IA interna.</p>
+        <span class="layer-tag">Infraestrutura</span>
+      </div>
+      <div class="layer-item">
+        <span class="layer-num">Fase IV</span>
+        <div class="layer-name">Inteligência</div>
+        <p class="layer-desc">Sistema Operacional / Camada de Decisão. Para quem quer operar com inteligência estrutural contínua.</p>
+        <span class="layer-tag">Operação Contínua</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- EVIDÊNCIA ESTRUTURAL -->
+  <section class="sobre-falx" aria-label="Evidência Estrutural">
+
+    <div class="sobre-r1">
+      <div class="sobre-eyebrow">Evidência Estrutural</div>
+      <p class="sobre-lead">O que se materializa ao final de cada fase.</p>
+      <p class="sobre-intro">Cada fase produz ativos concretos, documentados e operacionais — não recomendações abstratas. Estrutura que a empresa passa a possuir, operar e evoluir.</p>
+    </div>
+
+    <div class="sobre-r2">
+      <div class="sobre-r2-left">
+        <p class="sobre-body">Os entregáveis do processo são ativos institucionais de longo prazo — não relatórios descartáveis. Cada documento produzido é projetado para ser referência canônica dentro da empresa:</p>
+        <ul class="sobre-list">
+          <li>fonte autoritária para times internos e sistemas de IA</li>
+          <li>base semântica para interpretação consistente por máquinas e pessoas</li>
+          <li>infraestrutura que acumula valor com o tempo</li>
+          <li>documentação que sobrevive a mudanças de time e contexto</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sobre-r3">
+      <div class="sobre-card">
+        <span class="sobre-block-title">AI Intelligence Audit Report</span>
+        <p class="sobre-body">Diagnóstico da representação atual da empresa em IA, gaps semânticos identificados e roadmap estrutural.</p>
+        <ul class="sobre-list">
+          <li>leitura de como LLMs descrevem a empresa hoje</li>
+          <li>mapeamento de lacunas e imprecisões de interpretação</li>
+          <li>roadmap estrutural de arquitetura</li>
+        </ul>
+        <p class="sobre-note">Relatório Estratégico</p>
+      </div>
+      <div class="sobre-card">
+        <span class="sobre-block-title">Canonical Knowledge Document</span>
+        <p class="sobre-body">Fonte autoritária de definição institucional, lógica do produto e linguagem conceitual.</p>
+        <ul class="sobre-list">
+          <li>definição oficial da empresa e do produto</li>
+          <li>arquitetura conceitual documentada</li>
+          <li>linguagem institucional canônica</li>
+        </ul>
+        <p class="sobre-note">Documento Institucional</p>
+      </div>
+      <div class="sobre-card">
+        <span class="sobre-block-title">Semantic Model + Knowledge Graph</span>
+        <p class="sobre-body">Taxonomia, relações conceituais, base semântica e modelo de relações estruturadas para IA interna e camada de decisão.</p>
+        <ul class="sobre-list">
+          <li>ontologia do produto e relações semânticas</li>
+          <li>knowledge graph para sistemas inteligentes internos</li>
+          <li>base operacional para copilots e agentes</li>
+        </ul>
+        <p class="sobre-note">Framework Semântico + Arquitetura de Dados</p>
+      </div>
+    </div>
+
+    <div class="sobre-r4">
+      <div class="sobre-r4-left">
+        <span class="sobre-block-title">14 Módulos de Execução</span>
+        <ul class="sobre-list">
+          <li>AI Intelligence Audit · Knowledge Mapping · Conceptual Architecture</li>
+          <li>Semantic Modeling · Canonical Document · Strategic Whitepaper · Narrative Engineering</li>
+          <li>AI Discoverability · Knowledge Graph · AI-Ready Knowledge Base</li>
+          <li>Decision Intelligence · Knowledge OS · Visual Assets · Final Strategic Report</li>
+        </ul>
+      </div>
+      <div class="sobre-r4-right">
+        <span class="sobre-block-title">Uma arquitetura contínua</span>
+        <p class="sobre-mission">Quatro fases estratégicas. Quatorze módulos. Uma arquitetura que transforma conhecimento disperso em infraestrutura institucional clara, operacional, interpretável e durável.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PONTO DE ENTRADA + FILTRO -->
+  <section class="access-protocol" id="contact" aria-labelledby="ap-heading">
+    <div class="ap-inner">
+
+      <div class="ap-form-wrap">
+        <div class="ap-form-header">
+          <span class="ap-protocol-tag">Ponto de Entrada</span>
+          <h2 class="ap-headline" id="ap-heading" style="margin-top:1.2rem;">AI Intelligence Audit</h2>
+          <p class="ap-body" style="margin-top:1.6rem;max-width:560px;">O ponto de entrada para todo o restante. Todo engajamento começa com uma leitura precisa de como sua empresa existe hoje dentro de sistemas de IA, onde estão os gaps conceituais e estruturais, e o que precisa ser construído.</p>
+          <p style="font-family:var(--f-mono);font-size:var(--fs-micro);color:var(--acc);letter-spacing:.18em;opacity:1;margin-top:1.2rem;">Recomendado para empresas em estágio de diagnóstico estrutural.</p>
+        </div>
+
+        <div class="sobre-r2" style="margin:3rem 0 0;border-top:1px solid var(--s2);padding-top:3rem;">
+          <div class="sobre-r2-left">
+            <span class="sobre-block-title" style="display:block;margin-bottom:1.4rem;">O que inclui</span>
+            <ul class="sobre-list">
+              <li>Leitura da representação atual da empresa em IA</li>
+              <li>Análise de narrativa e consistência semântica</li>
+              <li>Diagnóstico de gaps conceituais e estruturais</li>
+              <li>Recomendação de arquitetura futura</li>
+            </ul>
+            <p class="sobre-note" style="margin-top:2rem;">Entrega: Relatório estratégico + Roadmap de arquitetura</p>
+          </div>
+        </div>
+
+        <!-- FILTRO -->
+        <div style="margin-top:4rem;padding-top:3rem;border-top:1px solid var(--s2);">
+          <span class="ap-protocol-tag" style="margin-bottom:1.6rem;display:block;">Filtro de Engajamento</span>
+          <p class="ap-body" style="margin-bottom:1.6rem;">Este trabalho não é para:</p>
+          <ul class="sobre-list" style="margin-bottom:3rem;">
+            <li>empresas buscando marketing de curto prazo</li>
+            <li>demandas puramente promocionais</li>
+            <li>operações sem necessidade de estrutura conceitual ou base para IA</li>
+          </ul>
+        </div>
+
+        <!-- CTA -->
+        <div style="display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1rem;">
+          <a href="mailto:contato@falxsystems.com?subject=AI%20Intelligence%20Audit%20—%20Diagnóstico%20Inicial" class="ap-submit" style="text-decoration:none;display:inline-flex;align-items:center;gap:.8rem;">
+            <div class="ap-submit-corners" aria-hidden="true"></div>
+            <span>Solicitar Diagnóstico Inicial</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <button class="nav-cta" id="origemBtn" style="background:transparent;cursor:pointer;" onclick="document.getElementById('origemOverlay').classList.add('active')">
+            <span>Acessar a Origem</span>
+          </button>
+        </div>
+        <p style="font-family:var(--f-mono);font-size:var(--fs-micro);color:var(--t2);letter-spacing:.14em;margin-top:1.6rem;opacity:1;">Para empresas técnicas, produtos digitais complexos e operações em fase de consolidação estrutural.</p>
+      </div>
+
+      <div class="ap-bottom">
+        <div class="ap-bottom-left">
+          <div>
+            <span class="ap-protocol-tag" style="margin-bottom:1.2rem;display:inline-flex;">4 Fases · 14 Módulos</span>
+            <h3 class="ap-headline" style="font-size:calc(var(--fs-h2) * 1.1); margin-top:1rem;">A clareza institucional<br>não é acessória.<br>É infraestrutura.</h3>
+          </div>
+          <p class="ap-body">O AI Intelligence Audit é o ponto de entrada para todo o restante. Toda arquitetura começa com uma leitura precisa da realidade atual.</p>
+        </div>
+        <div class="ap-bottom-right">
+          <ul class="ap-steps">
+            <li class="ap-step"><span class="ap-step-num">I</span><span class="ap-step-label">Descoberta — Audit · Mapeamento</span></li>
+            <li class="ap-step"><span class="ap-step-num">II</span><span class="ap-step-label">Definição — Semântica · Documento Canônico</span></li>
+            <li class="ap-step"><span class="ap-step-num">III</span><span class="ap-step-label">Arquitetura — Knowledge Graph · AI Ready</span></li>
+            <li class="ap-step"><span class="ap-step-num">IV</span><span class="ap-step-label">Inteligência — Decisão · Sistema Operacional</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ORIGEM OVERLAY -->
+  <div class="exit-overlay" id="origemOverlay" aria-hidden="true" role="dialog" aria-label="Acessar a Origem">
+    <div class="exit-card" style="max-width:580px;">
+      <div class="exit-card-tag">Origem do Método</div>
+      <p style="font-family:var(--f-mono);font-size:calc(var(--fs-micro)*1.3);color:var(--acc);letter-spacing:.18em;margin-bottom:.4rem;">Lais Oliveira</p>
+      <p style="font-family:var(--f-body);font-size:var(--fs-small);color:var(--t2);letter-spacing:.1em;margin-bottom:.3rem;">Fundadora · Knowledge Systems Architect</p>
+      <p style="font-family:var(--f-mono);font-size:var(--fs-micro);color:var(--acc);opacity:.9;letter-spacing:.14em;margin-bottom:2rem;">Criadora do NeuroSaaS™</p>
+      <p class="exit-card-text" style="font-size:1rem;line-height:1.75;">Este método surgiu da necessidade de estruturar, documentar e tornar operacional o conhecimento de empresas técnicas — da arquitetura conceitual à base semântica necessária para interpretação por IA, mercado e sistemas internos. Hoje, essa abordagem também evolui na criação do NeuroSaaS™.</p>
+      <div style="margin:2rem 0;padding:1.6rem;border:1px solid rgba(91,114,242,.2);background:rgba(91,114,242,.03);">
+        <p style="font-family:var(--f-mono);font-size:var(--fs-micro);color:var(--acc);letter-spacing:.2em;margin-bottom:.8rem;opacity:1;">NeuroSaaS™</p>
+        <p style="font-family:var(--f-display);font-size:1.05rem;font-weight:200;color:var(--t0);line-height:1.6;margin-bottom:.8rem;">A próxima camada dos sistemas baseados em conhecimento.</p>
+        <p style="font-family:var(--f-body);font-size:var(--fs-small);color:var(--t2);line-height:1.7;margin-bottom:.8rem;">Uma arquitetura de software orientada por conhecimento estruturado, em que sistemas não apenas executam funções, mas interpretam, organizam e operam sobre uma base semântica contínua.</p>
+        <p style="font-family:var(--f-body);font-size:var(--fs-small);color:var(--t0);font-style:italic;">Não é software como serviço. É conhecimento como infraestrutura operacional.</p>
+      </div>
+      <div class="exit-card-actions">
+        <a href="mailto:contato@falxsystems.com?subject=AI%20Intelligence%20Audit" class="exit-card-cta" style="text-decoration:none;text-align:center;">Solicitar AI Intelligence Audit</a>
+        <button class="exit-card-dismiss" id="origemDismiss">Fechar</button>
+      </div>
+      <p style="font-family:var(--f-mono);font-size:calc(var(--fs-micro)*.85);color:var(--t2);letter-spacing:.12em;opacity:.8;margin-top:1.6rem;text-align:center;">Toda arquitetura começa com uma leitura precisa da realidade atual.</p>
+    </div>
+  </div>
+
+  <!-- EXIT INTENT OVERLAY -->
+  <div class="exit-overlay" id="exitOverlay" aria-hidden="true" role="dialog" aria-label="Solicitar diagnóstico">
+    <div class="exit-card">
+      <div class="exit-card-tag">ANTES DE SAIR</div>
+      <p class="exit-card-text">A clareza institucional começa com uma leitura.<br>O diagnóstico inicial leva dois minutos para solicitar.</p>
+      <div class="exit-card-actions">
+        <a href="mailto:contato@falxsystems.com?subject=AI%20Intelligence%20Audit%20—%20Diagnóstico%20Inicial" class="exit-card-cta" style="text-decoration:none;text-align:center;">Solicitar Diagnóstico Inicial</a>
+        <button class="exit-card-dismiss" id="exitDismiss">Agora não</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="institutional-footer">
+    <div class="footer-inner">
+      <div class="footer-identity">FALX  — Arquitetura de Conhecimento &amp; Inteligência Institucional</div>
+      <div class="footer-copyright">© 2026 FALX. Todos os direitos reservados.</div>
+      <div class="footer-ip">NeuroSaaS™ e FALX são metodologias proprietárias e propriedade intelectual de FALX Systems.</div>
+      <div class="footer-entity">Fundadora: Lais Oliveira · Knowledge Systems Architect</div>
+      <div class="footer-contact">Contato: <a href="mailto:contact@falxsystems.com">contato@falxsystems.com</a></div>
+      <div class="footer-links">
+        <a href="https://falxsystem.com/" target="_blank" rel="noopener">FALX Systems</a>
+        <a href="https://www.linkedin.com/in/falx" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-semantic">Arquitetura de conhecimento institucional para empresas técnicas e produtos digitais complexos.</div>
+    </div>
+  </footer>
+
+<script>
+    // NAV scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav?.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = '1'; });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.sp-glow-card, .v1-pillar, .layer-item, .sobre-card, .sobre-r4, .ap-step').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transition = 'opacity .6s ease';
+      observer.observe(el);
+    });
+
+    // Origem overlay
+    const origemOverlay = document.getElementById('origemOverlay');
+    const origemDismiss = document.getElementById('origemDismiss');
+    origemDismiss?.addEventListener('click', () => origemOverlay?.classList.remove('active'));
+    origemOverlay?.addEventListener('click', (e) => {
+      if (e.target === origemOverlay) origemOverlay.classList.remove('active');
+    });
+
+    // Exit intent
+    let exitTriggered = false;
+    const exitOverlay = document.getElementById('exitOverlay');
+    const exitDismiss = document.getElementById('exitDismiss');
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY < 20 && !exitTriggered) {
+        exitTriggered = true;
+        exitOverlay?.classList.add('active');
+      }
+    });
+    exitDismiss?.addEventListener('click', () => exitOverlay?.classList.remove('active'));
+    exitOverlay?.addEventListener('click', (e) => {
+      if (e.target === exitOverlay) exitOverlay.classList.remove('active');
+    });
+</script>
+</body>
+</html>
