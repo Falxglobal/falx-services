@@ -171,19 +171,36 @@
     .nav-cta span { position: relative; z-index: 1; }
 
     /* ── HERO ─────────────────────────────────────── */
-    .hero-section { min-height: 100vh; padding: calc(80px + 8vh) var(--g) 6vh; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
-    .hero-section::before { content: ''; position: absolute; inset: 0; background: rgba(2,2,6,.55), radial-gradient(ellipse at 72% 14%, rgba(20,32,120,.32) 0%, rgba(42,61,160,.12) 30%, transparent 60%), radial-gradient(ellipse at 10% 75%, rgba(20,32,120,.20) 0%, transparent 58%); pointer-events: none; }
-    .hero-section::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: linear-gradient(to top, rgba(2,2,6,.85) 0%, transparent 100%); pointer-events: none; z-index: 0; }
-    .hero-eyebrow-row { display: flex; justify-content: space-between; align-items: center; opacity: 0; animation: fade-up .8s cubic-bezier(.16,1,.3,1) .1s forwards; }
-    .hero-eyebrow { font-family: var(--f-mono); font-size: var(--fs-micro); color: var(--acc); letter-spacing: .28em; text-transform: uppercase; opacity: .85; }
-    .hero-text { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 5vh 0 3vh; position: relative; z-index: 1; }
-    .hero-title { font-family: var(--f-display); font-size: clamp(1.68rem, 3.5vw, 3.78rem); line-height: 1.06; font-weight: 200; letter-spacing: -.04em; max-width: 22ch; color: #ffffff; opacity: 0; animation: fade-up 1.2s cubic-bezier(.16,1,.3,1) .35s forwards; margin-bottom: 0; }
-    @keyframes fade-up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
-    .hero-divider { width: 80px; height: 1px; background: linear-gradient(90deg, rgba(77,103,245,1), rgba(148,171,255,.6), transparent); margin: 2.4rem 0 2rem; flex-shrink: 0; box-shadow: 0 0 12px rgba(77,103,245,.5), 0 0 24px rgba(77,103,245,.2); }
-    .hero-subtitle-block { max-width: 680px; opacity: 0; animation: fade-up 1.2s cubic-bezier(.16,1,.3,1) .7s forwards; display: flex; flex-direction: column; gap: 1.2rem; }
-    .hero-subtitle { font-family: var(--f-display); font-size: clamp(1rem, 1.4vw, 1.25rem); line-height: 1.75; font-weight: 300; letter-spacing: -.01em; color: rgba(255,255,255,.78); margin: 0; }
-    .hero-microfilter { font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.6); color: var(--t3); letter-spacing: .16em; text-transform: uppercase; line-height: 1.6; border-left: 1px solid rgba(77,103,245,.35); padding-left: 1.2rem; margin-top: .4rem; }
-    .hero-cta-row { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; margin-top: 2.8rem; opacity: 0; animation: fade-up 1s cubic-bezier(.16,1,.3,1) .95s forwards; position: relative; z-index: 1; }
+    /* ── HERO redesigned ─────────────────────────── */
+    @keyframes fade-up { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes scroll-pulse { 0%,100%{opacity:.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(.5)} }
+    .hero-section { min-height:100svh; padding:0 var(--g); display:flex; flex-direction:column; position:relative; overflow:hidden; background-image:linear-gradient(rgba(77,103,245,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(77,103,245,.022) 1px,transparent 1px); background-size:72px 72px; }
+    .hero-section::before { content:''; position:absolute; inset:0; background:rgba(2,2,6,.54),radial-gradient(ellipse at 68% 8%,rgba(18,28,110,.28) 0%,transparent 52%),radial-gradient(ellipse at 5% 82%,rgba(18,28,110,.15) 0%,transparent 48%); pointer-events:none; z-index:0; }
+    .hero-section::after { content:''; position:absolute; bottom:0; left:0; right:0; height:36%; background:linear-gradient(to top,rgba(2,2,6,.94) 0%,transparent 100%); pointer-events:none; z-index:0; }
+    .hero-topbar { display:flex; justify-content:space-between; align-items:center; padding:calc(80px + 2rem) 0 1.1rem; position:relative; z-index:1; border-bottom:1px solid rgba(255,255,255,.05); opacity:0; animation:fade-up .7s var(--ease) .05s forwards; }
+    .hero-eyebrow { font-family:var(--f-mono); font-size:var(--fs-micro); color:var(--t3); letter-spacing:.26em; text-transform:uppercase; opacity:.75; }
+    .hero-status-badge { display:flex; align-items:center; gap:.55rem; font-family:var(--f-mono); font-size:var(--fs-micro); color:var(--t3); letter-spacing:.2em; text-transform:uppercase; }
+    .hero-status-dot { width:5px; height:5px; border-radius:50%; background:var(--acc); opacity:.9; animation:pulse-dot 2.5s ease-in-out infinite; flex-shrink:0; }
+    .hero-body { flex:1; display:grid; grid-template-columns:3fr 2fr; gap:0; align-items:center; position:relative; z-index:1; padding:5.5vh 0 4.5vh; border-bottom:1px solid rgba(77,103,245,.1); }
+    .hero-body::after { content:''; position:absolute; top:6%; bottom:6%; left:60%; width:1px; background:linear-gradient(180deg,transparent,rgba(77,103,245,.2) 30%,rgba(77,103,245,.12) 70%,transparent); pointer-events:none; }
+    .hero-left { padding-right:7%; display:flex; flex-direction:column; gap:2.6rem; opacity:0; animation:fade-up 1.1s var(--ease) .28s forwards; }
+    .hero-title { font-family:var(--f-display); font-size:clamp(2.016rem,4.2vw,4.536rem); line-height:1.1; font-weight:200; letter-spacing:-.04em; color:#ffffff; max-width:20ch; }
+    .hero-cta-row { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    .hero-right { padding-left:8%; display:flex; flex-direction:column; gap:1.8rem; opacity:0; animation:fade-up 1s var(--ease) .5s forwards; }
+    .hero-subtitle { font-family:var(--f-display); font-size:clamp(.88rem,1.1vw,1.05rem); line-height:1.82; font-weight:300; color:rgba(255,255,255,.5); border-left:1px solid rgba(77,103,245,.26); padding-left:1.3rem; }
+    .hero-tags { display:flex; flex-wrap:wrap; gap:.45rem; padding-left:2.6rem; }
+    .hero-tag { font-family:var(--f-mono); font-size:calc(var(--fs-micro)*1.3); color:var(--t3); letter-spacing:.12em; text-transform:uppercase; border:1px solid rgba(255,255,255,.07); padding:.25rem .7rem; transition:border-color .3s ease,color .3s ease; cursor:default; }
+    .hero-tag:hover { border-color:rgba(77,103,245,.3); color:var(--t2); }
+    .hero-bottom { display:flex; align-items:center; justify-content:space-between; padding:1.5rem 0; position:relative; z-index:1; opacity:0; animation:fade-up .7s var(--ease) .95s forwards; }
+    .hero-metrics { display:flex; align-items:center; gap:2.4rem; }
+    .hero-metric { display:flex; flex-direction:column; gap:.2rem; }
+    .hero-metric-num { font-family:var(--f-mono); font-size:clamp(1.1rem,1.7vw,1.7rem); color:var(--t0); letter-spacing:-.02em; font-weight:300; line-height:1; }
+    .hero-metric-label { font-family:var(--f-mono); font-size:var(--fs-micro); color:var(--t3); letter-spacing:.2em; text-transform:uppercase; }
+    .hero-metric-sep { width:1px; height:26px; background:rgba(255,255,255,.09); flex-shrink:0; }
+    .hero-scroll-hint { display:flex; flex-direction:column; align-items:center; }
+    .hero-scroll-line { width:1px; height:36px; background:linear-gradient(180deg,rgba(77,103,245,.5),transparent); animation:scroll-pulse 2.2s ease-in-out infinite; }
+    .hero-cta-secondary { font-family:var(--f-mono); font-size:calc(var(--fs-micro)*1.55); color:var(--t3); letter-spacing:.16em; text-transform:uppercase; text-decoration:none; transition:color .3s ease; }
+    .hero-cta-secondary:hover { color:var(--t1); }
     .hero-cta-btn {
       display: inline-flex; align-items: center; gap: 1rem;
       text-decoration: none; font-family: var(--f-mono);
@@ -464,6 +481,100 @@
       .layer-item { border-right: none; border-bottom: 1px solid var(--s2); }
       .layer-item:last-child { border-bottom: none; }
     }
+    /* ── ÁREAS DE ATUAÇÃO ───────────────────────────── */
+    .areas-section { padding:8rem var(--g); border-top:1px solid var(--s2); background:linear-gradient(180deg,rgba(42,61,200,.03) 0%,transparent 60%); }
+    .areas-inner { max-width:var(--content-max); margin:0 auto; }
+    .areas-header { margin-bottom:4rem; display:grid; grid-template-columns:1fr 1fr; gap:var(--g); align-items:end; }
+    .areas-eyebrow { font-family:var(--f-mono); font-size:var(--fs-micro); color:var(--acc); letter-spacing:.28em; text-transform:uppercase; opacity:.75; display:block; margin-bottom:.8rem; grid-column:1/-1; }
+    .areas-title { font-family:var(--f-display); font-size:clamp(1.4rem,2.4vw,2.4rem); font-weight:200; color:var(--t0); letter-spacing:-.03em; line-height:1.2; }
+    .areas-sub { font-family:var(--f-display); font-size:clamp(.88rem,1.1vw,1.05rem); color:var(--t2); line-height:1.7; font-weight:300; align-self:end; }
+    .areas-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--s2); }
+    .area-card { display:flex; flex-direction:column; gap:1.4rem; padding:2.8rem 2.4rem; border-right:1px solid var(--s2); border-bottom:1px solid var(--s2); text-decoration:none; position:relative; overflow:hidden; transition:background .35s var(--ease); }
+    .area-card:nth-child(3n) { border-right:none; }
+    .area-card:nth-child(4),.area-card:nth-child(5) { border-bottom:none; }
+    .area-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(42,61,200,.12) 0%,transparent 65%); opacity:0; transition:opacity .4s var(--ease); pointer-events:none; }
+    .area-card::after { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(148,171,255,.8),rgba(77,103,245,.5),transparent); opacity:0; transition:opacity .35s var(--ease); }
+    .area-card:hover { background:rgba(42,61,200,.04); }
+    .area-card:hover::before { opacity:1; }
+    .area-card:hover::after { opacity:1; }
+    .area-card-num { font-family:var(--f-mono); font-size:var(--fs-micro); color:var(--acc); letter-spacing:.22em; opacity:.7; }
+    .area-card-content { flex:1; display:flex; flex-direction:column; gap:.7rem; }
+    .area-card-title { font-family:var(--f-display); font-size:clamp(.95rem,1.2vw,1.15rem); font-weight:400; color:var(--t0); letter-spacing:-.02em; line-height:1.3; transition:color .3s ease; }
+    .area-card:hover .area-card-title { color:#fff; }
+    .area-card-desc { font-family:var(--f-display); font-size:clamp(.82rem,1vw,.95rem); color:var(--t2); line-height:1.65; font-weight:300; }
+    .area-card-arrow { font-family:var(--f-mono); font-size:calc(var(--fs-label)*1.4); color:var(--acc); opacity:.4; transition:opacity .3s ease,transform .3s var(--ease); align-self:flex-end; }
+    .area-card:hover .area-card-arrow { opacity:1; transform:translateX(4px); }
+    @media (max-width:900px) { .areas-grid { grid-template-columns:repeat(2,1fr); } .area-card:nth-child(3n) { border-right:1px solid var(--s2); } .area-card:nth-child(2n) { border-right:none; } .area-card:nth-child(4),.area-card:nth-child(5) { border-bottom:1px solid var(--s2); } .area-card:last-child { border-bottom:none; } .areas-header { grid-template-columns:1fr; } }
+    @media (max-width:540px) { .areas-grid { grid-template-columns:1fr; } .area-card { border-right:none !important; } }
+
+    /* ══ RESPONSIVE — sistema completo ══════════════════ */
+    /* nav mobile */
+    @media (max-width:768px) {
+      nav { padding:var(--sm) var(--g); }
+      .system-status { display:none; }
+      .nav-cta { padding:var(--xs) var(--sm); font-size:calc(var(--fs-micro)*1.6); }
+    }
+    @media (max-width:480px) {
+      .brand { font-size:calc(var(--fs-label)*1.5); letter-spacing:.2em; }
+    }
+    /* hero responsive */
+    @media (max-width:1024px) {
+      .hero-body { grid-template-columns:1fr; gap:3rem; padding:4vh 0 3.5vh; }
+      .hero-body::after { display:none; }
+      .hero-left { padding-right:0; }
+      .hero-right { padding-left:0; }
+      .hero-subtitle { border-left:none; padding-left:0; }
+      .hero-tags { padding-left:0; }
+      .hero-title { font-size:clamp(2rem,5vw,4.2rem); }
+    }
+    @media (max-width:768px) {
+      .hero-topbar { padding-top:calc(68px + 1.6rem); }
+      .hero-title { font-size:clamp(1.9rem,6.5vw,3.2rem); }
+      .hero-bottom { flex-wrap:wrap; gap:1rem; }
+      .hero-scroll-hint { display:none; }
+      .hero-metrics { gap:1.6rem; }
+    }
+    @media (max-width:480px) {
+      .hero-title { font-size:clamp(1.65rem,7vw,2.6rem); }
+      .hero-cta-row { flex-direction:column; align-items:flex-start; }
+      .hero-cta-btn { width:100%; justify-content:space-between; }
+      .hero-metrics { gap:1.2rem; flex-wrap:wrap; }
+      .hero-metric-sep { display:none; }
+    }
+    /* proof bar */
+    @media (max-width:768px) { .proof-bar-inner { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:440px) { .proof-bar-inner { grid-template-columns:1fr; } }
+    /* structural problem */
+    @media (max-width:900px) { .sp-glow-cards { grid-template-columns:1fr 1fr; } .sp-glow-card:nth-child(even) { border-right:none; } .sp-glow-card:nth-child(3),.sp-glow-card:nth-child(4) { border-top:1px solid var(--s2); } }
+    @media (max-width:540px) { .sp-glow-cards { grid-template-columns:1fr; } .sp-glow-card { border-right:none; border-bottom:1px solid var(--s2); } }
+    /* ns-definition */
+    @media (max-width:900px) { .ns-def-inner { grid-template-columns:1fr; } .ns-def-right { border-left:none; border-top:2px solid var(--acc); } }
+    /* v1 pillars */
+    @media (max-width:768px) { .v1-pillars { grid-template-columns:1fr; } .v1-pillar { border-right:none; border-bottom:1px solid var(--s2); } .v1-divider { flex-wrap:wrap; gap:.8rem; } .v1-divider-tag:last-child { display:none; } }
+    /* inevitability */
+    @media (max-width:768px) { .inevitability { padding:5rem var(--g); } .inevitability p { font-size:clamp(.95rem,3.5vw,1.3rem); } .inevitability p.conclusion { font-size:clamp(1.5rem,5vw,2.4rem); } }
+    /* layers */
+    @media (max-width:1024px) { .layers-header { grid-template-columns:1fr; } .layers-grid { grid-template-columns:repeat(2,1fr); } .layer-item:nth-child(2n) { border-right:none; } .layer-item:nth-child(5),.layer-item:nth-child(6) { border-bottom:1px solid var(--s2); } .layer-item:nth-child(7),.layer-item:nth-child(8) { border-bottom:none; } }
+    @media (max-width:540px) { .layers-grid { grid-template-columns:1fr; } .layer-item { border-right:none; border-bottom:1px solid var(--s2); } .layer-item:last-child { border-bottom:none; } }
+    /* sobre */
+    @media (max-width:1024px) { .sobre-r3 { grid-template-columns:1fr; } .sobre-card { border-right:none; border-bottom:1px solid var(--s2); } .sobre-r4 { grid-template-columns:1fr; } .sobre-r4-left { border-right:none; border-bottom:1px solid var(--s2); } }
+    /* contact form */
+    @media (max-width:1024px) { .ap-bottom { grid-template-columns:1fr; } .ap-bottom-left { border-right:none; border-bottom:1px solid rgba(255,255,255,.08); padding:3rem 0; } .ap-bottom-right { padding:3rem 0 0; } }
+    @media (max-width:600px) { .ap-field-row { grid-template-columns:1fr; } .ap-field-row .ap-field:first-child { border-right:none; } .ap-inner { padding:5rem var(--g) 4rem; } }
+    /* global spacing on small screens */
+    @media (max-width:768px) {
+      :root { --g:5vw; --3xl:4rem; }
+      .sp-top-row { padding:5rem var(--g); }
+      .layers-section { padding:5.5rem var(--g); }
+      .sobre-r1 { padding:4.5rem var(--g); }
+      .sobre-r2-left,.sobre-r3 .sobre-card,.sobre-r4-left,.sobre-r4-right { padding:3.2rem var(--g); }
+      .areas-section { padding:5.5rem var(--g); }
+      .ap-inner { padding:5rem var(--g) 4rem; }
+    }
+    @media (max-width:480px) {
+      :root { --g:1.2rem; }
+      .ns-def-left,.ns-def-right { padding:3rem var(--g); }
+    }
   </style>
   <link rel="canonical-entity" href="https://falxsystem.com">
   <script type="application/ld+json">
@@ -602,27 +713,62 @@
 
     <!-- ══ HERO ══════════════════════════════════════════ -->
     <section class="hero-section" aria-label="Apresentação">
-      <div class="hero-eyebrow-row" aria-hidden="true">
-        <span class="hero-eyebrow">Arquitetura de Conhecimento / 2026</span>
-        <span class="hero-eyebrow">FALX Systems</span>
-      </div>
-      <div class="hero-text">
-        <h1 class="hero-title">Estruturamos o conhecimento da sua empresa para que ela seja compreendida com precisão por IA, mercado e times internos.</h1>
-        <div class="hero-divider" aria-hidden="true"></div>
-        <div class="hero-subtitle-block">
-          <p class="hero-subtitle">Para empresas técnicas, produtos digitais complexos e operações que precisam transformar conhecimento disperso em infraestrutura institucional.</p>
-          <p class="hero-microfilter" aria-label="Para quem é este trabalho">Para quem é: startups deep tech · produtos digitais complexos · ventures em consolidação · operações preparando IA interna</p>
+      <!-- topbar -->
+      <div class="hero-topbar">
+        <span class="hero-eyebrow">FALX Systems · Arquitetura de Conhecimento</span>
+        <div class="hero-status-badge" aria-hidden="true">
+          <span class="hero-status-dot"></span>
+          <span class="hero-status-text">2026</span>
         </div>
       </div>
-      <div class="hero-cta-row">
-        <a href="#contact" class="hero-cta-btn">
-          <span class="btn-corners" aria-hidden="true"></span>
-          <span>Solicitar Diagnóstico Inicial</span>
-          <svg class="btn-arrow" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a href="#fases" class="hero-cta-secondary">Ver as 4 fases →</a>
+
+      <!-- dois colunas: título + CTA  |  contexto + tags -->
+      <div class="hero-body">
+        <div class="hero-left">
+          <h1 class="hero-title">Estruturamos o conhecimento da sua empresa para que ela seja compreendida com precisão por IA, mercado e times internos.</h1>
+          <div class="hero-cta-row">
+            <a href="#contact" class="hero-cta-btn">
+              <span class="btn-corners" aria-hidden="true"></span>
+              <span>Solicitar Diagnóstico Inicial</span>
+              <svg class="btn-arrow" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="#fases" class="hero-cta-secondary">4 fases →</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <p class="hero-subtitle">Para empresas técnicas, produtos digitais complexos e operações que precisam transformar conhecimento disperso em infraestrutura institucional.</p>
+          <div class="hero-tags" aria-label="Para quem é">
+            <span class="hero-tag">Deep tech</span>
+            <span class="hero-tag">Produtos digitais</span>
+            <span class="hero-tag">Ventures</span>
+            <span class="hero-tag">IA interna</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- barra de métricas -->
+      <div class="hero-bottom">
+        <div class="hero-metrics">
+          <div class="hero-metric">
+            <span class="hero-metric-num">04</span>
+            <span class="hero-metric-label">Fases estratégicas</span>
+          </div>
+          <div class="hero-metric-sep" aria-hidden="true"></div>
+          <div class="hero-metric">
+            <span class="hero-metric-num">14</span>
+            <span class="hero-metric-label">Módulos de execução</span>
+          </div>
+          <div class="hero-metric-sep" aria-hidden="true"></div>
+          <div class="hero-metric">
+            <span class="hero-metric-num">03</span>
+            <span class="hero-metric-label">Frentes estruturais</span>
+          </div>
+        </div>
+        <div class="hero-scroll-hint" aria-hidden="true">
+          <span class="hero-scroll-line"></span>
+        </div>
       </div>
     </section>
 
@@ -852,6 +998,59 @@
         <div class="sobre-r4-right">
           <span class="sobre-block-title">Uma arquitetura contínua</span>
           <p class="sobre-mission">Quatro fases estratégicas. Quatorze módulos. Uma arquitetura que transforma conhecimento disperso em infraestrutura institucional clara, operacional e durável.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ ÁREAS DE ATUAÇÃO ══════════════════════════════ -->
+    <section class="areas-section" aria-label="Áreas de atuação">
+      <div class="areas-inner">
+        <div class="areas-header">
+          <span class="areas-eyebrow">Frentes Estruturais</span>
+          <h2 class="areas-title">Cada área é uma entrada orgânica diferente.</h2>
+          <p class="areas-sub">Aprofunde-se em cada frente da arquitetura de conhecimento — cada página explora um problema específico com profundidade técnica.</p>
+        </div>
+        <div class="areas-grid">
+          <a href="arquitetura-de-conhecimento.html" class="area-card">
+            <span class="area-card-num">01</span>
+            <div class="area-card-content">
+              <h3 class="area-card-title">Arquitetura de Conhecimento</h3>
+              <p class="area-card-desc">Como estruturar o conhecimento institucional para que ele seja interpretável, operável e durável — por IA e por pessoas.</p>
+            </div>
+            <span class="area-card-arrow">→</span>
+          </a>
+          <a href="inteligencia-institucional.html" class="area-card">
+            <span class="area-card-num">02</span>
+            <div class="area-card-content">
+              <h3 class="area-card-title">Inteligência Institucional</h3>
+              <p class="area-card-desc">A diferença entre operar com clareza estrutural e operar no caos. O que torna uma empresa capaz de tomar decisões consistentes.</p>
+            </div>
+            <span class="area-card-arrow">→</span>
+          </a>
+          <a href="ai-intelligence-audit.html" class="area-card">
+            <span class="area-card-num">03</span>
+            <div class="area-card-content">
+              <h3 class="area-card-title">AI Intelligence Audit</h3>
+              <p class="area-card-desc">Diagnóstico de como sua empresa existe dentro de sistemas de IA — gaps semânticos, imprecisões de narrativa e roadmap estrutural.</p>
+            </div>
+            <span class="area-card-arrow">→</span>
+          </a>
+          <a href="knowledge-graph-empresas.html" class="area-card">
+            <span class="area-card-num">04</span>
+            <div class="area-card-content">
+              <h3 class="area-card-title">Knowledge Graph para Empresas</h3>
+              <p class="area-card-desc">Como transformar conhecimento disperso em estrutura semântica operável por IA interna, copilots e agentes.</p>
+            </div>
+            <span class="area-card-arrow">→</span>
+          </a>
+          <a href="base-de-conhecimento-para-ia.html" class="area-card">
+            <span class="area-card-num">05</span>
+            <div class="area-card-content">
+              <h3 class="area-card-title">Base de Conhecimento para IA</h3>
+              <p class="area-card-desc">A infraestrutura que determina o que seus agentes conseguem fazer. Por que a maioria das bases existentes não é AI-ready.</p>
+            </div>
+            <span class="area-card-arrow">→</span>
+          </a>
         </div>
       </div>
     </section>
