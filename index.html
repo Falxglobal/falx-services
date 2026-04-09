@@ -128,7 +128,7 @@
     /* ── NAV ─────────────────────────────────────── */
     nav { position: fixed; top:0; left:0; right:0; padding: var(--md) var(--g); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(77,103,245,0.12); background: rgba(4,4,10,.88); backdrop-filter: blur(24px) saturate(200%); z-index: 1000; transition: all .4s var(--ease-std); }
     nav.scrolled { background: rgba(4,4,10,.97); border-bottom-color: rgba(77,103,245,0.22); box-shadow: 0 1px 40px rgba(4,4,10,.8); }
-    .brand { font-family: var(--f-mono); font-size: calc(var(--fs-label) * 1.8384); letter-spacing: .3em; text-transform: uppercase; font-weight: 600; color: var(--t0); opacity: .9; }
+    .brand { text-decoration:none;  font-family: var(--f-mono); font-size: calc(var(--fs-label) * 1.8384); letter-spacing: .3em; text-transform: uppercase; font-weight: 600; color: var(--t0); opacity: .9; }
     .nav-actions { display:flex; align-items:center; gap: var(--lg); }
     .system-status { font-family: var(--f-mono); font-size: calc(var(--fs-micro) * 1.8384); color: var(--t2); letter-spacing: .12em; animation: blink 3s infinite; display: flex; align-items: center; gap: var(--xs); }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.55} }
